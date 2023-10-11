@@ -1,0 +1,3 @@
+scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss prova.txt DLSFDN02S@ui-studenti.scope.unina.it:sommanumeri
+
+ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss DLSFDN02S@ui-studenti.scope.unina.it
