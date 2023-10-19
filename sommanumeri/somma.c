@@ -3,9 +3,9 @@
 #include <math.h>
 #include "mpi.h"
 
-main(int argc, char *argv[]){
-    int menum, nproc;
-    int n, nloc, tag, i, strat, start_pos, sum, parz_sum, rest, tmp;
+int main(int argc, char *argv[]) {
+    int menum, nproc, tag, i, start_pos, rest, strat;
+    long n, nloc, sum, parz_sum, tmp;
     int *x, *xloc;
     double log_nproc;
     double start_time, end_time, elapsed_time, total_time;
@@ -17,7 +17,7 @@ main(int argc, char *argv[]){
     MPI_Comm_rank(MPI_COMM_WORLD, &menum);
     MPI_Comm_size(MPI_COMM_WORLD, &nproc);
 
-    for (int iter = 0; iter++; iter < 10) { //Eseguiamo tutto 10 volte per avere una media dei tempi 
+    for (int iter = 0; iter < 10; iter++) { //Eseguiamo tutto 10 volte per avere una media dei tempi 
 
         //Acquisizione dell'input
         if (menum==0){
@@ -28,6 +28,10 @@ main(int argc, char *argv[]){
             n = atoi(argv[1]);   
             x = (int*) malloc(n*(sizeof(int)));
             if (n <= 20) {
+                if (argc != n+3) {
+                    perror("Numero di argomenti errato!");
+                    return 1;
+                }
                 for (i = 0 ; i < n; i++)
                     x[i] = atoi(argv[2+i]);
 
@@ -53,13 +57,14 @@ main(int argc, char *argv[]){
         }
 
         //Comunicazione dei dati
-        MPI_Bcast(&n, 1, MPI_INT, 0, MPI_COMM_WORLD);
+        MPI_Bcast(&n, 1, MPI_LONG, 0, MPI_COMM_WORLD);
         MPI_Bcast(&strat, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
         //Eventuale cambio di strategia
         if (strat == 2 || strat == 3) { 
             if ((nproc & (nproc-1)) != 0) { //numero di processi non potenza di 2
-                printf("E' stata richiesta la strategia %d ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1\n", strat);
+                if (menum == 0) 
+                    printf("E' stata richiesta la strategia %d ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1\n", strat);
                 strat = 1;
             } 
         }
@@ -113,15 +118,15 @@ main(int argc, char *argv[]){
                 if (menum == 0) {
                     for (i = 1; i < nproc; i++) {
                         tag = 80+i;
-                        MPI_Recv(&parz_sum, 1, MPI_INT, i, tag, MPI_COMM_WORLD, &status);
+                        MPI_Recv(&parz_sum, 1, MPI_LONG, i, tag, MPI_COMM_WORLD, &status);
                         sum+=parz_sum; 
                     }
                     end_time = MPI_Wtime();
-                    printf("La somma totale calcolata con la prima strategia e' %d\n", sum);
+                    printf("La somma totale calcolata con la prima strategia e' %ld\n", sum);
                 }
                 else {
                     tag = 80+menum;
-                    MPI_Send(&sum, 1, MPI_INT, 0, tag, MPI_COMM_WORLD);
+                    MPI_Send(&sum, 1, MPI_LONG, 0, tag, MPI_COMM_WORLD);
                     end_time = MPI_Wtime();
                 }
                 break;
@@ -131,59 +136,61 @@ main(int argc, char *argv[]){
                     if (menum % pow[i] == 0) {
                         if (menum % pow[i+1] == 0) {
                             tag = 120 + menum + pow[i];
-                            MPI_Recv(&parz_sum, 1, MPI_INT, menum+pow[i], tag, MPI_COMM_WORLD, &status);
+                            MPI_Recv(&parz_sum, 1, MPI_LONG, menum+pow[i], tag, MPI_COMM_WORLD, &status);
                             sum+=parz_sum; 
                         }
                         else {
                             tag = 120 + menum;
-                            MPI_Send(&sum, 1, MPI_INT, menum-pow[i], tag, MPI_COMM_WORLD);
+                            MPI_Send(&sum, 1, MPI_LONG, menum-pow[i], tag, MPI_COMM_WORLD);
                             break;
                         }
                     }
                 }
                 end_time = MPI_Wtime();
                 if (menum == 0)
-                    printf("La somma totale calcolata con la seconda strategia e' %d\n", sum);
+                    printf("La somma totale calcolata con la seconda strategia e' %ld\n", sum);
                 break;
             
             case 3: //III strategia
                 for (i = 0; i < log_nproc; i++) {
                     if (menum % pow[i+1] < pow[i]) {
                         tag = 200 + menum + pow[i];
-                        MPI_Recv(&parz_sum, 1, MPI_INT, menum+pow[i], tag, MPI_COMM_WORLD, &status);
+                        MPI_Recv(&parz_sum, 1, MPI_LONG, menum+pow[i], tag, MPI_COMM_WORLD, &status);
                         tag = 200 + menum;
-                        MPI_Send(&sum, 1, MPI_INT, menum+pow[i], tag, MPI_COMM_WORLD);
+                        MPI_Send(&sum, 1, MPI_LONG, menum+pow[i], tag, MPI_COMM_WORLD);
                         sum+=parz_sum; 
                     }
                     else {
                         tag = 200 + menum;
-                        MPI_Send(&sum, 1, MPI_INT, menum-pow[i], tag, MPI_COMM_WORLD);
+                        MPI_Send(&sum, 1, MPI_LONG, menum-pow[i], tag, MPI_COMM_WORLD);
                         tag = 200 + menum - pow[i];
-                        MPI_Recv(&parz_sum, 1, MPI_INT, menum-pow[i], tag, MPI_COMM_WORLD, &status);
+                        MPI_Recv(&parz_sum, 1, MPI_LONG, menum-pow[i], tag, MPI_COMM_WORLD, &status);
                         sum+=parz_sum; 
                     }
                 }
                 end_time = MPI_Wtime();
-                printf("Sono il processo %d, la somma totale e' %d\n", menum, sum);
+                printf("Sono il processo %d, la somma totale calcolata con la terza strategia e' %ld\n", menum, sum);
                 break;
             
             default:
-                perror("Input della strategia errato");
+                if (menum == 0) 
+                    perror("Input della strategia errato");
                 return 1;
 
         }
 
         elapsed_time = end_time - start_time;
-        MPI_Reduce(elapsed_time, total_time, 1, MPI_INT, MPI_MAX, 0, MPI_COMM_WORLD);
+        MPI_Reduce(&elapsed_time, &total_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD);
 
-        if (menum == 0)
+        if (menum == 0) {
             time_mean+=total_time;
+        }
         
     }
         
     if (menum == 0) {  
         time_mean/=10;
-        printf("Tempo impiegato: %e", time_mean);
+        printf("Strategia usata: %d,\nNumero di input: %ld,\nNumero di processori:%d,\nTempo impiegato: %e\n\n\n\n", strat, n, nproc, time_mean);
     }
 
     MPI_Finalize();
