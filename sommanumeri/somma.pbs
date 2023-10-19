@@ -3,13 +3,12 @@
 # Direttive
 
 #PBS -q studenti
-#PBS -l nodes=8
+#PBS -l nodes=8:ppn=8
 #PBS -N somma
 #PBS -o somma.out
 #PBS -e somma.err
 
-NCPU='wc -l < $PBS_NODEFILE'
-echo 'This job is allocated on '${NCPU}' cpu(s)'
+hostlist < `sort -u $PBS_NODEFILE`
 cat $PBS_NODEFILE
 
 PBS_O_WORKDIR=$PBS_O_HOME/sommanumeri
@@ -27,6 +26,12 @@ echo PBS: current home directory is $PBS_O_HOME
 echo PBS: PATH = $PBS_O_PATH
 echo ------------------------------------------------------
 
-/usr/lib64/openmpi/1.4/gcc/bin/mpicc -o $PBS_O_WORKDIR/somma $PBS_O_WORKDIR/somma.c
+/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/somma $PBS_O_WORKDIR/somma.c
 
-/usr/lib64/openmpi/1.4/gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $NCPU $PBS_O_WORKDIR/somma
+for n in 100 1000 10000
+do
+    for NCPU in 1 2 4 8
+    do
+        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/somma $n 2
+    done
+done
