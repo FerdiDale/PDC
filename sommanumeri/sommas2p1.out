@@ -1,0 +1,281 @@
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+------------------------------------------------------
+PBS: qsub is running on ui-studenti.scope.unina.it
+PBS: originating queue is studenti
+PBS: executing queue is studenti
+PBS: working directory is /homes/DMA/PDC/2024/DLSFDN02S/sommanumeri
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 4011571.torque02.scope.unina.it
+PBS: job name is sommas2p1
+PBS: node file is /var/spool/pbs/aux//4011571.torque02.scope.unina.it
+PBS: current home directory is /homes/DMA/PDC/2024/DLSFDN02S
+PBS: PATH = /usr/lib64/openmpi/1.2.7-gcc/bin:/usr/kerberos/bin:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/mpirt/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64_mic:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/debugger/gui/intel64:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/usr/local/bin:/bin:/usr/bin:/opt/exp_soft/HADOOP/hadoop-1.0.3/bin:/opt/exp_soft/unina.it/intel/composerxe/bin/intel64/:/opt/exp_soft/unina.it/MPJExpress/mpj-v0_38/bin:/homes/DMA/PDC/2024/DLSFDN02S/bin
+------------------------------------------------------
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+Strategia usata: 2,
+Numero di input: 100,
+Numero di processori:1,
+Tempo impiegato: 1.215935e-06
+
+
+
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+La somma totale calcolata con la seconda strategia e' 2700
+Strategia usata: 2,
+Numero di input: 100,
+Numero di processori:2,
+Tempo impiegato: 1.950264e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+Strategia usata: 2,
+Numero di input: 100,
+Numero di processori:4,
+Tempo impiegato: 2.090931e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+La somma totale calcolata con la seconda strategia e' 9000
+Strategia usata: 2,
+Numero di input: 100,
+Numero di processori:8,
+Tempo impiegato: 5.559921e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+Strategia usata: 2,
+Numero di input: 1000,
+Numero di processori:1,
+Tempo impiegato: 5.197525e-06
+
+
+
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+La somma totale calcolata con la seconda strategia e' 50000
+Strategia usata: 2,
+Numero di input: 1000,
+Numero di processori:2,
+Tempo impiegato: 2.105236e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+La somma totale calcolata con la seconda strategia e' 94000
+Strategia usata: 2,
+Numero di input: 1000,
+Numero di processori:4,
+Tempo impiegato: 7.061958e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+La somma totale calcolata con la seconda strategia e' 44000
+Strategia usata: 2,
+Numero di input: 1000,
+Numero di processori:8,
+Tempo impiegato: 7.250309e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 440000
+La somma totale calcolata con la seconda strategia e' 440000
+La somma totale calcolata con la seconda strategia e' 440000
+La somma totale calcolata con la seconda strategia e' 440000
+La somma totale calcolata con la seconda strategia e' 440000
+La somma totale calcolata con la seconda strategia e' 440000
+La somma totale calcolata con la seconda strategia e' 440000
+La somma totale calcolata con la seconda strategia e' 457425
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+Strategia usata: 2,
+Numero di input: 10000,
+Numero di processori:1,
+Tempo impiegato: 4.003048e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+La somma totale calcolata con la seconda strategia e' 690000
+Strategia usata: 2,
+Numero di input: 10000,
+Numero di processori:2,
+Tempo impiegato: 6.289482e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 660000
+Strategia usata: 2,
+Numero di input: 10000,
+Numero di processori:4,
+Tempo impiegato: 4.823208e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 660000
+La somma totale calcolata con la seconda strategia e' 526548
+La somma totale calcolata con la seconda strategia e' 480000
+La somma totale calcolata con la seconda strategia e' 480000
+La somma totale calcolata con la seconda strategia e' 480000
+La somma totale calcolata con la seconda strategia e' 480000
+La somma totale calcolata con la seconda strategia e' 480000
+La somma totale calcolata con la seconda strategia e' 480000
+La somma totale calcolata con la seconda strategia e' 480000
+La somma totale calcolata con la seconda strategia e' 480000
+Strategia usata: 2,
+Numero di input: 10000,
+Numero di processori:8,
+Tempo impiegato: 6.380081e-05
+
+
+
+------------------------------------------------------

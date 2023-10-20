@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 #include "mpi.h"
+
+int random_int();
 
 int main(int argc, char *argv[]) {
     int menum, nproc, tag, i, start_pos, rest, strat;
     long n, nloc, sum, parz_sum, tmp;
     int *x, *xloc;
+    int iter;
     double log_nproc;
     double start_time, end_time, elapsed_time, total_time;
     double time_mean = 0.0;
@@ -17,7 +21,7 @@ int main(int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &menum);
     MPI_Comm_size(MPI_COMM_WORLD, &nproc);
 
-    for (int iter = 0; iter < 10; iter++) { //Eseguiamo tutto 10 volte per avere una media dei tempi 
+    for (iter = 0; iter < 10; iter++) { //Eseguiamo tutto 10 volte per avere una media dei tempi 
 
         //Acquisizione dell'input
         if (menum==0){
@@ -40,7 +44,7 @@ int main(int argc, char *argv[]) {
             } 
             else {
                 for (i = 0; i < n; i++)
-                    x[i] = 1;
+                    x[i] = random_int();
                 
                 strat = atoi(argv[2]);
             }
@@ -197,4 +201,9 @@ int main(int argc, char *argv[]) {
 
     return 0;
 
+}
+
+int random_int() {
+    srand(time(NULL));
+    return rand()%100;
 }

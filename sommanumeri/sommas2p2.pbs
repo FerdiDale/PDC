@@ -4,11 +4,11 @@
 
 #PBS -q studenti
 #PBS -l nodes=8:ppn=8
-#PBS -N somma
-#PBS -o somma.out
-#PBS -e somma.err
+#PBS -N sommas2p2
+#PBS -o sommas2p2.out
+#PBS -e sommas2p2.err
 
-hostlist < `sort -u $PBS_NODEFILE`
+sort -u $PBS_NODEFILE > hostlist
 cat $PBS_NODEFILE
 
 PBS_O_WORKDIR=$PBS_O_HOME/sommanumeri
@@ -26,12 +26,14 @@ echo PBS: current home directory is $PBS_O_HOME
 echo PBS: PATH = $PBS_O_PATH
 echo ------------------------------------------------------
 
-/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/somma $PBS_O_WORKDIR/somma.c
+/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/sommas2p2 $PBS_O_WORKDIR/somma.c
 
-for n in 100 1000 10000
+for n in 100000 1000000
 do
     for NCPU in 1 2 4 8
     do
-        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/somma $n 2
+        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/sommas2p2 $n 2
     done
 done
+
+echo ------------------------------------------------------

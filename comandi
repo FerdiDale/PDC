@@ -1,3 +1,5 @@
-scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss prova.txt DLSFDN02S@ui-studenti.scope.unina.it:sommanumeri
+sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss somma.c sommas1p1.pbs sommas1p2.pbs sommas2p1.pbs sommas2p2.pbs sommas3p1.pbs sommas3p2.pbs DLSFDN02S@ui-studenti.scope.unina.it:sommanumeri
 
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss DLSFDN02S@ui-studenti.scope.unina.it
+
+sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss DLSFDN02S@ui-studenti.scope.unina.it:sommanumeri/sommas1p1.out .
