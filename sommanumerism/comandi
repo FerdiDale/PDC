@@ -1,0 +1,1 @@
+scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss sommasm.c sommasm.pbs DLSFDN02S@ui-studenti.scope.unina.it:sommanumerism
