@@ -1,0 +1,433 @@
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+------------------------------------------------------
+PBS: qsub is running on ui-studenti,scope,unina,it
+PBS: originating queue is studenti
+PBS: executing queue is studenti
+PBS: working directory is /homes/DMA/PDC/2024/DLSFDN02S/sommanumeri
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 4012137,torque02,scope,unina,it
+PBS: job name is sommas3p2
+PBS: node file is /var/spool/pbs/aux//4012137,torque02,scope,unina,it
+PBS: current home directory is /homes/DMA/PDC/2024/DLSFDN02S
+PBS: PATH = /usr/lib64/openmpi/1,2,7-gcc/bin:/usr/kerberos/bin:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/bin/intel64:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/mpirt/bin/intel64:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/bin/intel64:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/bin/intel64_mic:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/debugger/gui/intel64:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/usr/local/bin:/bin:/usr/bin:/opt/exp_soft/HADOOP/hadoop-1,0,3/bin:/opt/exp_soft/unina,it/intel/composerxe/bin/intel64/:/opt/exp_soft/unina,it/MPJExpress/mpj-v0_38/bin:/homes/DMA/PDC/2024/DLSFDN02S/bin
+------------------------------------------------------
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 7000000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 5501071
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1300000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1300000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1300000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1300000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 3505812
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 4100000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 4100000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 4100000
+Strategia usata: 3,
+Numero di input: 100000,
+Numero di processori:1,
+Tempo impiegato: 3,939152e-04
+
+
+
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 1100000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1100000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 1100000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1100000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 1100000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1100000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 2183720
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 2183720
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 5500000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 5500000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 5500000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 5500000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 5500000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 5500000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 5500000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 5500000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6576152
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6576152
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6900000
+Strategia usata: 3,
+Numero di input: 100000,
+Numero di processori:2,
+Tempo impiegato: 2,242327e-04
+
+
+
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 3800000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 5494557
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 5494557
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 5494557
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 5494557
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 6700000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6162519
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 6162519
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6162519
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 6162519
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1800000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 1800000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 1800000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 1800000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 1800000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 1800000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 1800000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 1800000
+Strategia usata: 3,
+Numero di input: 100000,
+Numero di processori:4,
+Tempo impiegato: 2,044439e-04
+
+
+
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 9300000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 9229488
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 9229488
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 9229488
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 9229488
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 9229488
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 9229488
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 9229488
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 9229488
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 6900000
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 4088304
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 4088304
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 4088304
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 4088304
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 4088304
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 4088304
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 4088304
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 4088304
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 2100000
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 2100000
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 2100000
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 2100000
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 2100000
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 2100000
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 2100000
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 2100000
+Strategia usata: 3,
+Numero di input: 100000,
+Numero di processori:8,
+Tempo impiegato: 2,271414e-04
+
+
+
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 32787400
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 60926126
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 58581529
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 64757532
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 68310174
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 41980393
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 10180724
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 42727569
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 84294870
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 78182680
+Strategia usata: 3,
+Numero di input: 1000000,
+Numero di processori:1,
+Tempo impiegato: 3,972483e-03
+
+
+
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 58571148
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 58571148
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 57767376
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 57767376
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 71225966
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 71225966
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 92066025
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 92066025
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 88245264
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 88245264
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 47895016
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 47895016
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 66772122
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 66772122
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 33388585
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 33388585
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 64480046
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 64480046
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 39275520
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 39275520
+Strategia usata: 3,
+Numero di input: 1000000,
+Numero di processori:2,
+Tempo impiegato: 2,063036e-03
+
+
+
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 79494187
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 79494187
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 79494187
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 79494187
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 71106281
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 71106281
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 71106281
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 71106281
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 73802028
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 73802028
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 73802028
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 73802028
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 60936622
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 60936622
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 60936622
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 60936622
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 47513360
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 47513360
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 47513360
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 47513360
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55890132
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55890132
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55890132
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55890132
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 51396564
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 51396564
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 51396564
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 51396564
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 51839059
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 51839059
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 51839059
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 51839059
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55825501
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55825501
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55825501
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55825501
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 46475478
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 46475478
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 46475478
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 46475478
+Strategia usata: 3,
+Numero di input: 1000000,
+Numero di processori:4,
+Tempo impiegato: 1,100039e-03
+
+
+
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 52490545
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 52490545
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 52490545
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 52490545
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 52490545
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 52490545
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 52490545
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 52490545
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 60870550
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 60870550
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 60870550
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 60870550
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 60870550
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 60870550
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 60870550
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 60870550
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 30289696
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 30289696
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 30289696
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 30289696
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 30289696
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 30289696
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 30289696
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 30289696
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 41328140
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 41328140
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 41328140
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 41328140
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 41328140
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 41328140
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 41328140
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 41328140
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 67003751
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 67003751
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 67003751
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 67003751
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 67003751
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 67003751
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 67003751
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 67003751
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 56153778
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 56153778
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 56153778
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 56153778
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 56153778
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 56153778
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 56153778
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 56153778
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 32648901
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 32648901
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 32648901
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 32648901
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 32648901
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 32648901
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 32648901
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 32648901
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 56783991
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 56783991
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 56783991
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 56783991
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 56783991
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 56783991
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 56783991
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 56783991
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 28455807
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 28455807
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 28455807
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 28455807
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 28455807
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 28455807
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 28455807
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 28455807
+Sono il processo 7, la somma totale calcolata con la terza strategia e' 26108960
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 26108960
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 26108960
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 26108960
+Sono il processo 4, la somma totale calcolata con la terza strategia e' 26108960
+Sono il processo 5, la somma totale calcolata con la terza strategia e' 26108960
+Sono il processo 6, la somma totale calcolata con la terza strategia e' 26108960
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 26108960
+Strategia usata: 3,
+Numero di input: 1000000,
+Numero di processori:8,
+Tempo impiegato: 6,751537e-04
+
+
+
+------------------------------------------------------

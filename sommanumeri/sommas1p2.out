@@ -1,78 +1,78 @@
-wn280.scope.unina.it
-wn280.scope.unina.it
-wn280.scope.unina.it
-wn280.scope.unina.it
-wn280.scope.unina.it
-wn280.scope.unina.it
-wn280.scope.unina.it
-wn280.scope.unina.it
-wn279.scope.unina.it
-wn279.scope.unina.it
-wn279.scope.unina.it
-wn279.scope.unina.it
-wn279.scope.unina.it
-wn279.scope.unina.it
-wn279.scope.unina.it
-wn279.scope.unina.it
-wn278.scope.unina.it
-wn278.scope.unina.it
-wn278.scope.unina.it
-wn278.scope.unina.it
-wn278.scope.unina.it
-wn278.scope.unina.it
-wn278.scope.unina.it
-wn278.scope.unina.it
-wn277.scope.unina.it
-wn277.scope.unina.it
-wn277.scope.unina.it
-wn277.scope.unina.it
-wn277.scope.unina.it
-wn277.scope.unina.it
-wn277.scope.unina.it
-wn277.scope.unina.it
-wn276.scope.unina.it
-wn276.scope.unina.it
-wn276.scope.unina.it
-wn276.scope.unina.it
-wn276.scope.unina.it
-wn276.scope.unina.it
-wn276.scope.unina.it
-wn276.scope.unina.it
-wn275.scope.unina.it
-wn275.scope.unina.it
-wn275.scope.unina.it
-wn275.scope.unina.it
-wn275.scope.unina.it
-wn275.scope.unina.it
-wn275.scope.unina.it
-wn275.scope.unina.it
-wn274.scope.unina.it
-wn274.scope.unina.it
-wn274.scope.unina.it
-wn274.scope.unina.it
-wn274.scope.unina.it
-wn274.scope.unina.it
-wn274.scope.unina.it
-wn274.scope.unina.it
-wn273.scope.unina.it
-wn273.scope.unina.it
-wn273.scope.unina.it
-wn273.scope.unina.it
-wn273.scope.unina.it
-wn273.scope.unina.it
-wn273.scope.unina.it
-wn273.scope.unina.it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn280,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn279,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn278,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn277,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn276,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn275,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn274,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
+wn273,scope,unina,it
 ------------------------------------------------------
-PBS: qsub is running on ui-studenti.scope.unina.it
+PBS: qsub is running on ui-studenti,scope,unina,it
 PBS: originating queue is studenti
 PBS: executing queue is studenti
 PBS: working directory is /homes/DMA/PDC/2024/DLSFDN02S/sommanumeri
 PBS: execution mode is PBS_BATCH
-PBS: job identifier is 4011554.torque02.scope.unina.it
+PBS: job identifier is 4011554,torque02,scope,unina,it
 PBS: job name is sommas1p2
-PBS: node file is /var/spool/pbs/aux//4011554.torque02.scope.unina.it
+PBS: node file is /var/spool/pbs/aux//4011554,torque02,scope,unina,it
 PBS: current home directory is /homes/DMA/PDC/2024/DLSFDN02S
-PBS: PATH = /usr/lib64/openmpi/1.2.7-gcc/bin:/usr/kerberos/bin:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/mpirt/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64_mic:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/debugger/gui/intel64:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/usr/local/bin:/bin:/usr/bin:/opt/exp_soft/HADOOP/hadoop-1.0.3/bin:/opt/exp_soft/unina.it/intel/composerxe/bin/intel64/:/opt/exp_soft/unina.it/MPJExpress/mpj-v0_38/bin:/homes/DMA/PDC/2024/DLSFDN02S/bin
+PBS: PATH = /usr/lib64/openmpi/1,2,7-gcc/bin:/usr/kerberos/bin:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/bin/intel64:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/mpirt/bin/intel64:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/bin/intel64:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/bin/intel64_mic:/opt/exp_soft/unina,it/intel/composer_xe_2013_sp1,3,174/debugger/gui/intel64:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/usr/local/bin:/bin:/usr/bin:/opt/exp_soft/HADOOP/hadoop-1,0,3/bin:/opt/exp_soft/unina,it/intel/composerxe/bin/intel64/:/opt/exp_soft/unina,it/MPJExpress/mpj-v0_38/bin:/homes/DMA/PDC/2024/DLSFDN02S/bin
 ------------------------------------------------------
 La somma totale calcolata con la prima strategia e' 2900000
 La somma totale calcolata con la prima strategia e' 2996387
@@ -87,7 +87,7 @@ La somma totale calcolata con la prima strategia e' 2600000
 Strategia usata: 1,
 Numero di input: 100000,
 Numero di processori:1,
-Tempo impiegato: 3.951311e-04
+Tempo impiegato: 3,951311e-04
 
 
 
@@ -104,7 +104,7 @@ La somma totale calcolata con la prima strategia e' 4900000
 Strategia usata: 1,
 Numero di input: 100000,
 Numero di processori:2,
-Tempo impiegato: 2.390385e-04
+Tempo impiegato: 2,390385e-04
 
 
 
@@ -121,7 +121,7 @@ La somma totale calcolata con la prima strategia e' 5917600
 Strategia usata: 1,
 Numero di input: 100000,
 Numero di processori:3,
-Tempo impiegato: 1.800776e-04
+Tempo impiegato: 1,800776e-04
 
 
 
@@ -138,7 +138,7 @@ La somma totale calcolata con la prima strategia e' 6400000
 Strategia usata: 1,
 Numero di input: 100000,
 Numero di processori:4,
-Tempo impiegato: 1.732826e-04
+Tempo impiegato: 1,732826e-04
 
 
 
@@ -155,7 +155,7 @@ La somma totale calcolata con la prima strategia e' 3200000
 Strategia usata: 1,
 Numero di input: 100000,
 Numero di processori:5,
-Tempo impiegato: 1.565456e-04
+Tempo impiegato: 1,565456e-04
 
 
 
@@ -172,7 +172,7 @@ La somma totale calcolata con la prima strategia e' 5800000
 Strategia usata: 1,
 Numero di input: 100000,
 Numero di processori:6,
-Tempo impiegato: 1.748800e-04
+Tempo impiegato: 1,748800e-04
 
 
 
@@ -189,7 +189,7 @@ La somma totale calcolata con la prima strategia e' 3200000
 Strategia usata: 1,
 Numero di input: 100000,
 Numero di processori:7,
-Tempo impiegato: 2.081037e-03
+Tempo impiegato: 2,081037e-03
 
 
 
@@ -206,7 +206,7 @@ La somma totale calcolata con la prima strategia e' 6941250
 Strategia usata: 1,
 Numero di input: 100000,
 Numero di processori:8,
-Tempo impiegato: 1.906872e-04
+Tempo impiegato: 1,801729e-04
 
 
 
@@ -223,7 +223,7 @@ La somma totale calcolata con la prima strategia e' 34373031
 Strategia usata: 1,
 Numero di input: 1000000,
 Numero di processori:1,
-Tempo impiegato: 3.986192e-03
+Tempo impiegato: 3,986192e-03
 
 
 
@@ -240,7 +240,7 @@ La somma totale calcolata con la prima strategia e' 28477434
 Strategia usata: 1,
 Numero di input: 1000000,
 Numero di processori:2,
-Tempo impiegato: 2.059317e-03
+Tempo impiegato: 2,059317e-03
 
 
 
@@ -257,7 +257,7 @@ La somma totale calcolata con la prima strategia e' 48345885
 Strategia usata: 1,
 Numero di input: 1000000,
 Numero di processori:3,
-Tempo impiegato: 1.394200e-03
+Tempo impiegato: 1,394200e-03
 
 
 
@@ -274,7 +274,7 @@ La somma totale calcolata con la prima strategia e' 61761039
 Strategia usata: 1,
 Numero di input: 1000000,
 Numero di processori:4,
-Tempo impiegato: 1.087403e-03
+Tempo impiegato: 1,087403e-03
 
 
 
@@ -291,7 +291,7 @@ La somma totale calcolata con la prima strategia e' 49890316
 Strategia usata: 1,
 Numero di input: 1000000,
 Numero di processori:5,
-Tempo impiegato: 8.659124e-04
+Tempo impiegato: 8,834124e-04
 
 
 
@@ -308,7 +308,7 @@ La somma totale calcolata con la prima strategia e' 24439976
 Strategia usata: 1,
 Numero di input: 1000000,
 Numero di processori:6,
-Tempo impiegato: 1.794720e-03
+Tempo impiegato: 7,953167e-04
 
 
 
@@ -325,7 +325,7 @@ La somma totale calcolata con la prima strategia e' 19199683
 Strategia usata: 1,
 Numero di input: 1000000,
 Numero di processori:7,
-Tempo impiegato: 2.573109e-03
+Tempo impiegato: 2,573109e-03
 
 
 
@@ -342,7 +342,7 @@ La somma totale calcolata con la prima strategia e' 87423592
 Strategia usata: 1,
 Numero di input: 1000000,
 Numero di processori:8,
-Tempo impiegato: 6.542921e-04
+Tempo impiegato: 6,542921e-04
 
 
 

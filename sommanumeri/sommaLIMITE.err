@@ -1,0 +1,21 @@
+Input della strategia errato: Success
+--------------------------------------------------------------------------
+mpiexec has exited due to process rank 1 with PID 9461 on
+node wn274.scope.unina.it exiting without calling "finalize". This may
+have caused other processes in the application to be
+terminated by signals sent by mpiexec (as reported here).
+--------------------------------------------------------------------------
+Numero di input non valido!: No such file or directory
+--------------------------------------------------------------------------
+mpiexec has exited due to process rank 0 with PID 17801 on
+node wn273.scope.unina.it exiting without calling "finalize". This may
+have caused other processes in the application to be
+terminated by signals sent by mpiexec (as reported here).
+--------------------------------------------------------------------------
+Numero di argomenti insufficiente: No such file or directory
+--------------------------------------------------------------------------
+mpiexec has exited due to process rank 0 with PID 17833 on
+node wn273.scope.unina.it exiting without calling "finalize". This may
+have caused other processes in the application to be
+terminated by signals sent by mpiexec (as reported here).
+--------------------------------------------------------------------------

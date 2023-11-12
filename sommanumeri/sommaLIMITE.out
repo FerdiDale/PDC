@@ -1,0 +1,185 @@
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+------------------------------------------------------
+PBS: qsub is running on ui-studenti.scope.unina.it
+PBS: originating queue is studenti
+PBS: executing queue is studenti
+PBS: working directory is /homes/DMA/PDC/2024/DLSFDN02S/sommanumeri
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 4015534.torque02.scope.unina.it
+PBS: job name is sommaLIMITE
+PBS: node file is /var/spool/pbs/aux//4015534.torque02.scope.unina.it
+PBS: current home directory is /homes/DMA/PDC/2024/DLSFDN02S
+PBS: PATH = /usr/lib64/openmpi/1.2.7-gcc/bin:/usr/kerberos/bin:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/mpirt/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64_mic:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/debugger/gui/intel64:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/usr/local/bin:/bin:/usr/bin:/opt/exp_soft/HADOOP/hadoop-1.0.3/bin:/opt/exp_soft/unina.it/intel/composerxe/bin/intel64/:/opt/exp_soft/unina.it/MPJExpress/mpj-v0_38/bin:/homes/DMA/PDC/2024/DLSFDN02S/bin
+------------------------------------------------------
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+E' stata richiesta la strategia 2 ma il numero di processi richiesta non e' potenza di due, si prosegue con la strategia 1
+La somma totale calcolata con la prima strategia e' 1740
+Strategia usata: 1,
+Numero di input: 30,
+Numero di processori:7,
+Tempo impiegato: 2.411914e-03
+
+
+
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+La somma totale calcolata con la prima strategia e' 10
+Strategia usata: 1,
+Numero di input: 10,
+Numero di processori:4,
+Tempo impiegato: 6.291866e-05
+
+
+
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+La somma totale calcolata con la seconda strategia e' 55
+Strategia usata: 2,
+Numero di input: 10,
+Numero di processori:4,
+Tempo impiegato: 7.009506e-05
+
+
+
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 0, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 1, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 2, la somma totale calcolata con la terza strategia e' 55
+Sono il processo 3, la somma totale calcolata con la terza strategia e' 55
+Strategia usata: 3,
+Numero di input: 10,
+Numero di processori:4,
+Tempo impiegato: 5.955696e-05
+
+
+
+------------------------------------------------------

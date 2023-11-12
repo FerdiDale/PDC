@@ -1,4 +1,4 @@
-sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss somma.c sommas1p1.pbs sommas1p2.pbs sommas2p1.pbs sommas2p2.pbs sommas3p1.pbs sommas3p2.pbs DLSFDN02S@ui-studenti.scope.unina.it:sommanumeri
+sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss es3.c esmatrix.pbs DLSFDN02S@ui-studenti.scope.unina.it:esmatrix
 
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss DLSFDN02S@ui-studenti.scope.unina.it
 
