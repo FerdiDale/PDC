@@ -7,7 +7,7 @@ void createGrid(MPI_Comm *grid, MPI_Comm *gridRow, MPI_Comm *gridCol, int myRank
 // Function to distribute a matrix among processes
 void distributeMatrix (int * globalptr, const int myrow, const int mycol, const int rank, const int size, 
                     const int blocks[2], const int globalsizes[2], const int localsizes[2],
-                      int **localdata);
+                      int **localdata, MPI_Comm rowComm, MPI_Comm colComm);
 
 // Function to print the local matrix of each process
 void printLocalMatrix(int **localMatrix, int localRows, int localCols, int myRank);
@@ -19,8 +19,8 @@ void freeint2darray(int **a);
 int main(int argc, char **argv) {
     int myRank, numProcesses;
     int **matrix, **localMatrix;
-    int totalRows = 8; // Total number of rows in the matrix
-    int totalCols = 6; // Total number of columns in the matrix
+    int totalRows = 9; // Total number of rows in the matrix
+    int totalCols = 7; // Total number of columns in the matrix
     int localRows, localCols;
     MPI_Comm grid, gridRow, gridCol;
     int coordinates[2];
@@ -50,18 +50,15 @@ int main(int argc, char **argv) {
     }
 
     localCols = totalCols / q;
+    if (coordinates[1] < totalCols % q) {
+        localCols++;
+    }
 
     // Allocate space for the global matrix and the local matrix
-    matrix = allocint2darray(totalRows, totalCols);
+    if (myRank == 0) {
+        matrix = allocint2darray(totalRows, totalCols);
+    }
     localMatrix = allocint2darray(localRows, localCols);
-
-    for (int i = 1; i < totalRows; i++) {
-        matrix[i] = matrix[i - 1] + totalCols;
-    }
-
-    for (int i = 1; i < localRows; i++) {
-        localMatrix[i] = localMatrix[i - 1] + localCols;
-    }
 
     // Initialize the matrix on the root process (rank 0)
     if (myRank == 0) {
@@ -73,21 +70,25 @@ int main(int argc, char **argv) {
          // Print the local matrix on each process
         printLocalMatrix(matrix, totalRows, totalCols, myRank);
     }
+
     int blocks[2] = {p, q};
     int globalsizes[2] = {totalRows, totalCols};
     int localsizes[2] = {localRows, localCols};
     
     // Distribute the matrix among the processes
-    distributeMatrix(&(matrix[0][0]), coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix);
+    distributeMatrix(&(matrix[0][0]), coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol);
 
     // Print the local matrix on each process
     printLocalMatrix(localMatrix, localRows, localCols, myRank);
 
     // Deallocate memory
-    free(matrix[0]);
-    free(matrix);
-    free(localMatrix[0]);
-    free(localMatrix);
+    if (myRank == 0) {
+        freeint2darray(matrix);
+    }
+    freeint2darray(localMatrix);
+    MPI_Comm_free(&grid);
+    MPI_Comm_free(&gridRow);
+    MPI_Comm_free(&gridCol);
 
     MPI_Finalize();
     return 0;
@@ -126,15 +127,12 @@ void createGrid(MPI_Comm *grid, MPI_Comm *gridRow, MPI_Comm *gridCol, int myRank
 // (int **matrix, int rows, int cols, int ***localMatrix, int *localRows, int *localCols, int myRank, int *coords, int numRowsPerProcess, int numProcesses, MPI_Comm gridRow, MPI_Comm gridCol)
 void distributeMatrix (int * globalptr, const int myrow, const int mycol, const int rank, const int size, 
                     const int blocks[2], const int globalsizes[2], const int localsizes[2],
-                      int **localdata) {
+                      int **localdata, MPI_Comm rowComm, MPI_Comm colComm) {
     int **rowdata = NULL;
-    int rowBlocksize = globalsizes[0] / blocks[0];
-    int colBlocksize = globalsizes[1] / blocks[1];
-
-    /* create communicators which have processors with the same row or column in them*/
-    MPI_Comm colComm, rowComm;
-    MPI_Comm_split(MPI_COMM_WORLD, myrow, rank, &rowComm);
-    MPI_Comm_split(MPI_COMM_WORLD, mycol, rank, &colComm);
+    int rowBlocksize = globalsizes[0]/blocks[0];
+    int colBlocksize = globalsizes[1]/blocks[1];
+    int remainingRows = globalsizes[0]%blocks[0];
+    int remainingCols = globalsizes[1]%blocks[1];
 
     /* first, scatter the array by rows, with the processor in column 0 corresponding to each row
      * receiving the data */
@@ -145,15 +143,17 @@ void distributeMatrix (int * globalptr, const int myrow, const int mycol, const 
 
         for (int row=0; row<blocks[0]; row++) {
             /* each processor gets blocksize rows, each of size globalsizes[1]... */
-            sendcounts[row] = rowBlocksize*globalsizes[1];
+            sendcounts[row] = rowBlocksize;
+            if (row < remainingRows) {
+                sendcounts[row]++;
+            }
+            sendcounts[row]*=globalsizes[1];
             if (row > 0) 
                 senddispls[row] = senddispls[row-1] + sendcounts[row-1];
         }
-        /* the last processor gets one more */
-        //sendcounts[blocks[0]-1] += globalsizes[1];
 
         /* allocate my rowdata */
-        rowdata = allocint2darray( sendcounts[myrow], globalsizes[1] );
+        rowdata = allocint2darray(sendcounts[myrow], globalsizes[1] );
 
         /* perform the scatter of rows */
         MPI_Scatterv(globalptr, sendcounts, senddispls, MPI_INT,
@@ -167,10 +167,9 @@ void distributeMatrix (int * globalptr, const int myrow, const int mycol, const 
      * We can do this as we did in the previous example; create a vector
      * (and localvector) type and scatter accordingly */
     int locnrows = rowBlocksize;
-    //if ( isLastRow(myrow, blocks) )
-    //    locnrows++;
+    if (myrow < remainingRows) locnrows++;
 
-   MPI_Datatype vec, localvec;
+    MPI_Datatype vec, localvec;
     MPI_Type_vector(locnrows, 1, globalsizes[1], MPI_INT, &vec);
     MPI_Type_create_resized(vec, 0, sizeof(int), &vec);
     MPI_Type_commit(&vec);
@@ -181,12 +180,15 @@ void distributeMatrix (int * globalptr, const int myrow, const int mycol, const 
 
     int * sendcounts = (int *)malloc(blocks[1] * sizeof(int));
     int * senddispls = (int *)malloc(blocks[1] * sizeof(int));
-    //if (mycol == 0) {
-        for (int col=0; col<blocks[1]; col++) {
-            sendcounts[col] = colBlocksize;
-            senddispls[col] = col*colBlocksize;
+    senddispls[0] = 0;
+    for (int col=0; col<blocks[1]; col++) {
+        sendcounts[col] = colBlocksize;
+        if (col < remainingCols) {
+            sendcounts[col]++;
         }
-    //}
+        if (col > 0) 
+            senddispls[col] = senddispls[col-1] + sendcounts[col-1];
+    }
     int *rowptr = (mycol == 0) ? &(rowdata[0][0]) : NULL;
 
     MPI_Scatterv(rowptr, sendcounts, senddispls, vec,
@@ -200,9 +202,6 @@ void distributeMatrix (int * globalptr, const int myrow, const int mycol, const 
 
     free(sendcounts);
     free(senddispls);
-
-    MPI_Comm_free(&rowComm);
-    MPI_Comm_free(&colComm);
 }
 
 
