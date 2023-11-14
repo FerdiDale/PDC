@@ -2,14 +2,10 @@
 
 # PBS directives
 #PBS -q studenti
-#PBS -l nodes=8:ppn=8
+#PBS -l nodes=8
 #PBS -N ex1
 #PBS -o ex1.out
 #PBS -e ex1.err
-
-# Calculate the number of CPUs
-sort -u $PBS_NODEFILE > hostlist
-NCPU=$(wc -l < hostlist)
 
 echo "---------------------------"
 echo "This job is allocated on $NCPU CPU(s)."
@@ -35,4 +31,4 @@ echo "Compilazione di $PBS_O_WORKDIR/ex1.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/ex1 $PBS_O_WORKDIR/ex1.c
 
 # Esegui il programma
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $P $PBS_O_WORKDIR/ex1 $N_tmp $STRATEGY
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -np 4 $PBS_O_WORKDIR/ex1

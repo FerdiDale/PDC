@@ -2,21 +2,19 @@
 
 # PBS directives
 #PBS -q studenti
-#PBS -l nodes=4:ppn=8
+#PBS -l nodes=8
 #PBS -N ex3
 #PBS -o ex3.out
 #PBS -e ex3.err
 
 # Calculate the number of CPUs
-sort -u $PBS_NODEFILE > hostlist
-NCPU=$(wc -l < hostlist)
 
 echo "---------------------------"
 echo "This job is allocated on $NCPU CPU(s)."
 echo "Job is running on node(s):"
 cat hostlist
 
-PBS_O_WORKDIR=$PBS_O_HOME/3esercizi
+PBS_O_WORKDIR=$PBS_O_HOME/esmatrix
 echo "----------------------"
 echo "PBS: qsub is running on $PBS_O_HOST"
 echo "PBS: originating queue is $PBS_O_QUEUE"
@@ -35,4 +33,4 @@ echo "Compilazione di $PBS_O_WORKDIR/ex3.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/ex3 $PBS_O_WORKDIR/ex3.c
 
 # Esegui il programma
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $P $PBS_O_WORKDIR/ex3 $N_tmp $STRATEGY
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -np 2 $PBS_O_WORKDIR/ex3

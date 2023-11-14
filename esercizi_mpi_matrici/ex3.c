@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
+#include <string.h>
 
 // Funzione per creare una griglia di comunicazione MPI con righe e colonne
 void createGrid(MPI_Comm *grid, MPI_Comm *gridRow, MPI_Comm *gridCol, int myRank, int numProcesses, int numRows, int numCols, int *coords);
@@ -27,6 +28,7 @@ int main(int argc, char **argv) {
     int localRows, localCols;
     MPI_Comm grid, gridRow, gridCol;
     int coordinates[2];
+    int i,j;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
@@ -65,8 +67,8 @@ int main(int argc, char **argv) {
 
     // Inizializza la matrice sul processo radice (rank 0)
     if (myRank == 0) {
-        for (int i = 0; i < totalRows; i++) {
-            for (int j = 0; j < totalCols; j++) {
+        for (i = 0; i < totalRows; i++) {
+            for (j = 0; j < totalCols; j++) {
                 matrix[i][j] = i * totalCols + j;
             }
         }
@@ -79,7 +81,11 @@ int main(int argc, char **argv) {
     int localsizes[2] = {localRows, localCols};
     
     // Distribuisci la matrice tra i processi
-    distributeMatrix(&(matrix[0][0]), coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol);
+    if (myRank == 0)
+        distributeMatrix(&(matrix[0][0]), coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol);
+    else 
+        distributeMatrix(NULL, coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol);
+
 
     // Stampa la matrice locale su ogni processo
     printLocalMatrix(localMatrix, localRows, localCols, myRank);
@@ -135,6 +141,7 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
     int colBlocksize = globalsizes[1] / blocks[1];
     int remainingRows = globalsizes[0] % blocks[0];
     int remainingCols = globalsizes[1] % blocks[1];
+    int row, col;
 
     /* Prima di tutto, distribuire l'array per righe, con il processore nella colonna 0 corrispondente a ogni riga
      * ricevendo i dati */
@@ -143,7 +150,7 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
         int *senddispls = (int *)malloc(blocks[0] * sizeof(int));
         senddispls[0] = 0;
 
-        for (int row = 0; row < blocks[0]; row++) {
+        for (row = 0; row < blocks[0]; row++) {
             /* ogni processore ottiene blocksize righe, ognuna di dimensione globalsizes[1]... */
             sendcounts[row] = rowBlocksize;
             if (row < remainingRows) {
@@ -184,7 +191,7 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
     int *sendcounts = (int *)malloc(blocks[1] * sizeof(int));
     int *senddispls = (int *)malloc(blocks[1] * sizeof(int));
     senddispls[0] = 0;
-    for (int col = 0; col < blocks[1]; col++) {
+    for (col = 0; col < blocks[1]; col++) {
         sendcounts[col] = colBlocksize;
         if (col < remainingCols) {
             sendcounts[col]++;
@@ -210,20 +217,29 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
 
 
 void printLocalMatrix(int **localMatrix, int localRows, int localCols, int myRank) {
-    printf("Process %d: Local Matrix:\n", myRank);
-    for (int i = 0; i < localRows; i++) {
-        for (int j = 0; j < localCols; j++) {
-            printf("%4d", localMatrix[i][j]);
+    int i,j;
+    char buf [1000];
+    char addbuf [100];
+
+    snprintf(buf, sizeof(buf), "Process %d: Local Matrix:\n", myRank);
+    for (i = 0; i < localRows; i++) {
+        for (j = 0; j < localCols; j++) {
+            snprintf(addbuf, sizeof(addbuf), "%4d", localMatrix[i][j]);
+            strcat(buf,addbuf);
         }
-        printf("\n");
+        snprintf(addbuf, sizeof(addbuf), "\n");
+        strcat(buf, addbuf);
     }
-    printf("\n");
+    snprintf(addbuf, sizeof(addbuf), "\n");
+    strcat(buf,addbuf);
+    printf("%s", buf);
 }
 
 int **allocint2darray(int n, int m) {
+    int i;
     int **ptrs = calloc(n,sizeof(int *));
     ptrs[0] = calloc(n*m,sizeof(int));
-    for (int i=1; i<n; i++) 
+    for (i=1; i<n; i++) 
         ptrs[i] = ptrs[i-1] + m;
     return ptrs;
 }
