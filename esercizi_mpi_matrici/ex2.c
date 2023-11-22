@@ -5,6 +5,7 @@
 // Funzione per distribuire equamente il vettore tra i processi
 void distributeVector(int *V, int N, int *localV, int localN, int rank, int size) {
     int *sendcounts, *displs;
+    int i;
 
     // Allocazione di array per determinare il numero di elementi da inviare a ciascun processo e gli spostamenti
     sendcounts = (int *)malloc(size * sizeof(int));
@@ -15,7 +16,7 @@ void distributeVector(int *V, int N, int *localV, int localN, int rank, int size
     int remaining_elements = N % size;
 
     // Calcola il numero di elementi da inviare a ciascun processo e gli spostamenti
-    for (int i = 0; i < size; i++) {
+    for (i = 0; i < size; i++) {
         sendcounts[i] = avg_elements;
         if (i < remaining_elements) {
             sendcounts[i]++;
@@ -86,7 +87,7 @@ int main(int argc, char **argv) {
 
     // Inizializza il vettore V sul processo root (rank 0)
     if (rank == 0) {
-        for (int i = 0; i < N; i++) {
+        for (i = 0; i < N; i++) {
             V[i] = i;
         }
     }
@@ -97,7 +98,7 @@ int main(int argc, char **argv) {
     // Stampa il vettore locale su ogni processo
     printf("Processo %d: Vettore locale: ", rank);
     printf("[");
-    for (int i = 0; i < localN; i++) {
+    for (i = 0; i < localN; i++) {
         printf("%d ", localV[i]);
     }
     printf("]");
