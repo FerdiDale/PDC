@@ -14,7 +14,7 @@ echo "This job is allocated on $NCPU CPU(s)."
 echo "Job is running on node(s):"
 cat hostlist
 
-PBS_O_WORKDIR=$PBS_O_HOME/prodottomatvet_mpi
+PBS_O_WORKDIR=$PBS_O_HOME/prodottomatricevettore_mpi
 echo "----------------------"
 echo "PBS: qsub is running on $PBS_O_HOST"
 echo "PBS: originating queue is $PBS_O_QUEUE"
@@ -33,4 +33,4 @@ echo "Compilazione di $PBS_O_WORKDIR/ex3.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatvet $PBS_O_WORKDIR/prodottomatvet.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c
 
 # Esegui il programma
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -np 4 $PBS_O_WORKDIR/prodottomatvet
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -np 8 $PBS_O_WORKDIR/prodottomatvet 2 4 2 4 1
