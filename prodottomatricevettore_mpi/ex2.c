@@ -35,7 +35,7 @@ void distributeVector(int *V, int N, int *localV, int localN, int rank, int nPro
     * 0 è il rango del processo sorgente (in questo caso è il processo root).
     * MPI_COMM_WORLD è il communicator dei processi.
     */
-    MPI_Scatterv(V, sendcounts, displs, MPI_INT, localV, localN, MPI_INT, 0, communicator);
+    MPI_Scatterv(V, sendcounts, displs, MPI_INT, &localV[0], localN, MPI_INT, 0, communicator);
 
     // Libera la memoria allocata per gli array di invio e spostamento
     free(sendcounts);

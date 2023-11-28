@@ -13,6 +13,8 @@ void distributeGeneralVector(const int myrow, const int mycol, const int myRank,
 
 void printvec(int* vec, int size, int myRank);
 
+void gatherVector(int* locVec, int* totalVec, MPI_Comm communicator, int nsend, int nProc, int N);
+
 int main(int argc, char* argv[]) {
 
     int myRank, numProcesses;
@@ -57,12 +59,12 @@ int main(int argc, char* argv[]) {
 
     switch (strat) {
     case 1:
-        p=1;
-        q=totalCols;
+        p=numProcesses;
+        q=1;
         break;
     case 2:
-        p=totalRows;
-        q=1;
+        p=1;
+        q=numProcesses;
         break;
     case 3:
         break;
@@ -109,6 +111,7 @@ int main(int argc, char* argv[]) {
         }
         // Stampa la matrice totale
         printLocalMatrix(matrix, totalRows, totalCols, myRank);
+        printvec(xVec, totalCols, myRank);
     }
 
     int blocks[2] = { p, q };
@@ -151,14 +154,13 @@ void prodottoMatVet(int* globalptr, const int myrow, const int mycol, const int 
 
     int* sumVecLoc = calloc(localsizes[0], sizeof(int));
 
-    // printf("\nProcesso=%d : Arrivo a prima di distribuzione matrice\n", myRank);
+    // printf("\nProcesso=%d riga %d colonna %d : Arrivo a prima di distribuzione matrice\n", myRank, myrow, mycol);
 
     distributeMatrix(globalptr, myrow, mycol, myRank, nproc,
         blocks, globalsizes, localsizes,
         localdata, rowComm, colComm);
 
-    // printf("\nProcesso=%d : Arrivo a prima di distribuzione vettore\n", myRank);
-
+    // printf("\nProcesso=%d riga %d colonna %d dim vec %d: Arrivo a prima di distribuzione vettore\n", myRank, myrow, mycol, localsizes[1]);
 
     distributeGeneralVector(myrow, mycol, myRank, blocks, globalsizes, localsizes, rowComm, colComm, xVec, xVecLoc);
 
@@ -170,16 +172,49 @@ void prodottoMatVet(int* globalptr, const int myrow, const int mycol, const int 
 
     MPI_Allreduce(yVecLoc, sumVecLoc, localsizes[0], MPI_INT, MPI_SUM, rowComm);
 
-    MPI_Allgather(sumVecLoc, localsizes[0], MPI_INT, yVec, localsizes[0], MPI_INT, colComm);
+    gatherVector(sumVecLoc, yVec, colComm, localsizes[0], blocks[0], globalsizes[0]);
 
     free(sumVecLoc);
+
+}
+
+void gatherVector(int* locVec, int* totalVec, MPI_Comm communicator, int nsend, int nProc, int N) {
+
+    int *recvcounts, *displs;
+    int i;
+
+    // Allocazione di array per determinare il numero di elementi da inviare a ciascun processo e gli spostamenti
+    recvcounts = (int *)malloc(nProc * sizeof(int));
+    displs = (int *)malloc(nProc * sizeof(int));
+
+    // Calcola il numero medio di elementi per processo e gli elementi rimanenti
+    int avg_elements = N / nProc;
+    int remaining_elements = N % nProc;
+
+    // Calcola il numero di elementi da inviare a ciascun processo e gli spostamenti
+    for (i = 0; i < nProc; i++) {
+        recvcounts[i] = avg_elements;
+        if (i < remaining_elements) {
+            recvcounts[i]++;
+        }
+
+        displs[i] = (i > 0) ? (displs[i - 1] + recvcounts[i - 1]) : 0;
+    }
+
+    MPI_Allgatherv(locVec, nsend, MPI_INT, totalVec, recvcounts, displs, MPI_INT, communicator);
+
+    // Libera la memoria allocata per gli array di invio e spostamento
+    free(recvcounts);
+    free(displs);
 
 }
 
 void distributeGeneralVector(const int myrow, const int mycol, const int myRank,
     const int blocks[2], const int globalsizes[2], const int localsizes[2], MPI_Comm rowComm, MPI_Comm colComm, int* xVec, int* xVecLoc) {
     if (myrow == 0) {
-        distributeVector(xVec, globalsizes[1], xVecLoc, localsizes[1], mycol, blocks[0], rowComm);
+        distributeVector(xVec, globalsizes[1], xVecLoc, localsizes[1], mycol, blocks[1], rowComm);
+        // printf("\nProcesso=%d : Arrivo a dopo di distribuzione vettore\n", myRank);
+        printvec(xVecLoc, localsizes[1], myRank);
     }
     MPI_Bcast(xVecLoc, localsizes[1], MPI_INT, 0, colComm);
 }
