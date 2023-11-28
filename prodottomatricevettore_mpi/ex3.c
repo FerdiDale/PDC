@@ -62,6 +62,7 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
         rowdata = allocint2darray(sendcounts[myrow], globalsizes[1]);
 
         /* eseguire la distribuzione delle righe */
+        //  printf("\nProcesso=%d : Prima dello scatter di righe\n", rank);
         MPI_Scatterv(globalptr, sendcounts, senddispls, MPI_INT,
                      &(rowdata[0][0]), sendcounts[myrow], MPI_INT, 0, colComm);
 
@@ -97,6 +98,8 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
             senddispls[col] = senddispls[col - 1] + sendcounts[col - 1];
     }
     int *rowptr = (mycol == 0) ? &(rowdata[0][0]) : NULL;
+
+    printf("\nProcesso=%d : Prima dello scatter di colonne\n", rank);
 
     MPI_Scatterv(rowptr, sendcounts, senddispls, vec,
                  &(localdata[0][0]), sendcounts[mycol], localvec, 0, rowComm);

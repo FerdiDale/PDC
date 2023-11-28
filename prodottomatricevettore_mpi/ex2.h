@@ -5,6 +5,6 @@
 #include <stdlib.h>
 #include <mpi.h>
 
-void distributeVector(int *V, int N, int *localV, int localN, int rank, int size);
+void distributeVector(int *V, int N, int *localV, int localN, int rank, int size, MPI_Comm communicator);
 
 #endif

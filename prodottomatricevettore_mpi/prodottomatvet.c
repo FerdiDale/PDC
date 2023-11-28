@@ -4,31 +4,32 @@
 #include "ex2.h"
 #include "ex3.h"
 
-void prodottoMatVet(int *globalptr, const int myrow, const int mycol, const int myRank, const int nproc, 
-                      const int blocks[2], const int globalsizes[2], const int localsizes[2],
-                      int **localdata, MPI_Comm rowComm, MPI_Comm colComm, int*xVec, int*xVecLoc, int* yVec, int* yVecLoc, int strat);
+void prodottoMatVet(int* globalptr, const int myrow, const int mycol, const int myRank, const int nproc,
+    const int blocks[2], const int globalsizes[2], const int localsizes[2],
+    int** localdata, MPI_Comm rowComm, MPI_Comm colComm, int* xVec, int* xVecLoc, int* yVec, int* yVecLoc, int strat);
 
-void distributeGeneralVector(const int myrow, const int myRank,
-                      const int blocks[2], const int globalsizes[2], const int localsizes[2],  MPI_Comm colComm, int*xVec, int* xVecLoc);
+void distributeGeneralVector(const int myrow, const int mycol, const int myRank,
+    const int blocks[2], const int globalsizes[2], const int localsizes[2], MPI_Comm rowComm, MPI_Comm colComm, int* xVec, int* xVecLoc);
 
 void printvec(int* vec, int size, int myRank);
 
-int main (int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
 
     int myRank, numProcesses;
-    int **matrix, **localMatrix;
+    int** matrix = NULL;
+    int** localMatrix = NULL;
     int totalRows; // Numero totale di righe nella matrice
     int totalCols; // Numero totale di colonne nella matrice
     int localRows, localCols;
     MPI_Comm grid, gridRow, gridCol;
     int coordinates[2];
-    int i,j;
-    int p,q;
+    int i, j;
+    int p, q;
     int strat;
-    int* yVec;
-    int* xVec;
-    int* xVecLoc;
-    int* yVecLoc;
+    int* yVec = NULL;
+    int* xVec = NULL;
+    int* xVecLoc = NULL;
+    int* yVecLoc = NULL;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
@@ -54,21 +55,24 @@ int main (int argc, char* argv[]) {
         return 1;
     }
 
-    switch(strat) {
-        case 1: 
-            createGrid(&grid, &gridRow, &gridCol, myRank, numProcesses, 1, numProcesses, coordinates);
-            break;
-        case 2: 
-            createGrid(&grid, &gridRow, &gridCol, myRank, numProcesses, numProcesses, 1, coordinates);
-            break;
-        case 3: 
-            createGrid(&grid, &gridRow, &gridCol, myRank, numProcesses, p, q, coordinates);
-            break;
-        default:
-            perror("Numero di strategia errato");
-            MPI_Finalize();
-            exit(1);
+    switch (strat) {
+    case 1:
+        p=1;
+        q=totalCols;
+        break;
+    case 2:
+        p=totalRows;
+        q=1;
+        break;
+    case 3:
+        break;
+    default:
+        perror("Numero di strategia errato");
+        MPI_Finalize();
+        exit(1);
     }
+
+    createGrid(&grid, &gridRow, &gridCol, myRank, numProcesses, p, q, coordinates);
 
     // Crea la griglia 2D
 
@@ -86,12 +90,12 @@ int main (int argc, char* argv[]) {
     // Alloca spazio per la matrice globale e la matrice locale
     if (myRank == 0) {
         matrix = allocint2darray(totalRows, totalCols);
-        xVec = malloc(totalCols*sizeof(int));
-        yVec = calloc(totalRows,sizeof(int));
+        xVec = calloc(totalCols, sizeof(int));
     }
+    yVec = calloc(totalRows, sizeof(int));
     localMatrix = allocint2darray(localRows, localCols);
-    xVecLoc = malloc(localCols*sizeof(int));
-    yVecLoc = calloc(localRows,sizeof(int));    
+    xVecLoc = calloc(localCols, sizeof(int));
+    yVecLoc = calloc(localRows, sizeof(int));
 
     // Inizializza la matrice sul processo radice (rank 0)
     if (myRank == 0) {
@@ -107,17 +111,17 @@ int main (int argc, char* argv[]) {
         printLocalMatrix(matrix, totalRows, totalCols, myRank);
     }
 
-    int blocks[2] = {p, q};
-    int globalsizes[2] = {totalRows, totalCols};
-    int localsizes[2] = {localRows, localCols};
-    
+    int blocks[2] = { p, q };
+    int globalsizes[2] = { totalRows, totalCols };
+    int localsizes[2] = { localRows, localCols };
+
     // Distribuisci la matrice tra i processi
     if (myRank == 0)
         prodottoMatVet
-    (&(matrix[0][0]), coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol, xVec, xVecLoc, yVec, yVecLoc, strat);
-    else 
+        (&(matrix[0][0]), coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol, xVec, xVecLoc, yVec, yVecLoc, strat);
+    else
         prodottoMatVet
-    (NULL, coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol,  NULL, xVecLoc, NULL, yVecLoc, strat);
+        (NULL, coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol, xVec, xVecLoc, yVec, yVecLoc, strat);
 
     printvec(yVec, totalRows, myRank);
 
@@ -125,8 +129,8 @@ int main (int argc, char* argv[]) {
     if (myRank == 0) {
         freeint2darray(matrix);
         free(xVec);
-        free(yVec);
     }
+    free(yVec);
     freeint2darray(localMatrix);
     free(xVecLoc);
     free(yVecLoc);
@@ -139,27 +143,32 @@ int main (int argc, char* argv[]) {
 
 }
 
-void prodottoMatVet(int *globalptr, const int myrow, const int mycol, const int myRank, const int nproc, 
-                      const int blocks[2], const int globalsizes[2], const int localsizes[2],
-                      int **localdata, MPI_Comm rowComm, MPI_Comm colComm, int* xVec, int* xVecLoc, int* yVec, int* yVecLoc, int strat) {
+void prodottoMatVet(int* globalptr, const int myrow, const int mycol, const int myRank, const int nproc,
+    const int blocks[2], const int globalsizes[2], const int localsizes[2],
+    int** localdata, MPI_Comm rowComm, MPI_Comm colComm, int* xVec, int* xVecLoc, int* yVec, int* yVecLoc, int strat) {
 
-    int i,j;
+    int i, j;
 
     int* sumVecLoc = calloc(localsizes[0], sizeof(int));
 
-    distributeMatrix(globalptr, myrow, mycol, myRank, nproc, 
-                      blocks, globalsizes, localsizes,
-                      localdata, rowComm, colComm);
+    // printf("\nProcesso=%d : Arrivo a prima di distribuzione matrice\n", myRank);
 
-    distributeGeneralVector(myrow, myRank, blocks, globalsizes, localsizes, colComm, xVec, xVecLoc);
+    distributeMatrix(globalptr, myrow, mycol, myRank, nproc,
+        blocks, globalsizes, localsizes,
+        localdata, rowComm, colComm);
 
-    for (i=0; i<localsizes[0]; i++){
-        for (j=0; j<localsizes[1]; j++){
-            yVecLoc[i] += localdata[i][j]* xVecLoc[j];
+    // printf("\nProcesso=%d : Arrivo a prima di distribuzione vettore\n", myRank);
+
+
+    distributeGeneralVector(myrow, mycol, myRank, blocks, globalsizes, localsizes, rowComm, colComm, xVec, xVecLoc);
+
+    for (i = 0; i < localsizes[0]; i++) {
+        for (j = 0; j < localsizes[1]; j++) {
+            yVecLoc[i] += localdata[i][j] * xVecLoc[j];
         }
     }
 
-    MPI_Allreduce(yVecLoc, sumVecLoc, localsizes[0], MPI_INT, MPI_SUM, rowComm); 
+    MPI_Allreduce(yVecLoc, sumVecLoc, localsizes[0], MPI_INT, MPI_SUM, rowComm);
 
     MPI_Allgather(sumVecLoc, localsizes[0], MPI_INT, yVec, localsizes[0], MPI_INT, colComm);
 
@@ -167,25 +176,25 @@ void prodottoMatVet(int *globalptr, const int myrow, const int mycol, const int 
 
 }
 
-void distributeGeneralVector(const int myrow, const int myRank,
-                      const int blocks[2], const int globalsizes[2], const int localsizes[2],  MPI_Comm colComm, int*xVec, int* xVecLoc) {
+void distributeGeneralVector(const int myrow, const int mycol, const int myRank,
+    const int blocks[2], const int globalsizes[2], const int localsizes[2], MPI_Comm rowComm, MPI_Comm colComm, int* xVec, int* xVecLoc) {
     if (myrow == 0) {
-        distributeVector(xVec, globalsizes[1], xVecLoc, localsizes[1], myRank, blocks[0]);
+        distributeVector(xVec, globalsizes[1], xVecLoc, localsizes[1], mycol, blocks[0], rowComm);
     }
     MPI_Bcast(xVecLoc, localsizes[1], MPI_INT, 0, colComm);
 }
 
 void printvec(int* vec, int size, int myRank) {
-    int i,j;
-    char buf [1000];
-    char addbuf [100];
+    int i;
+    char buf[1000];
+    char addbuf[100];
 
     snprintf(buf, sizeof(buf), "Processo %d: Vettore risultante:\n", myRank);
     for (i = 0; i < size; i++) {
         snprintf(addbuf, sizeof(addbuf), "%4d ", vec[i]);
-        strcat(buf,addbuf);
+        strcat(buf, addbuf);
     }
     snprintf(addbuf, sizeof(addbuf), "\n");
-    strcat(buf,addbuf);
+    strcat(buf, addbuf);
     printf("%s", buf);
 }
