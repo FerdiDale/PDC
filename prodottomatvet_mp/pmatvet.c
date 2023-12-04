@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
+#if __STDC_VERSION__ < 199901L
+#define restrict /* nothing */
+#endif
+
 double *matxvet(int m, int n, double * restrict x, double * restrict A, double *elapsedTime);
 
 double **allocint2darray(int n, int m);
@@ -17,25 +21,25 @@ int get_num_threads();
 int main(int argc, char* argv[]){
 
     int n, m, i, j;
-    double **A;
+    double *A;
     double *x, *b;
     int iter;
     double deltat, avgt;
 
     if (argc != 3) { //Nome file, n, m
         perror("Numero di argomenti inseriti errato\n");
-        exit(1);
+        return 1;
     }
 
     n = atoi(argv[1]);
     m = atoi(argv[2]);
 
-    A = allocint2darray(n,m);
+    A = malloc(n*m*sizeof(double));
     x = malloc(m*sizeof(double));
 
     for (j = 0; j < m; j++) {
         for (i = 0; i < n; i++) {
-            A[i][j] = 1;
+            A[i*m+j] = 1;
         }
         x[j] = 1;
     }
@@ -44,11 +48,11 @@ int main(int argc, char* argv[]){
 
     for (iter = 0; iter < 10; iter++) { //Ripetiamo il processo 10 volte facendo la media dei tempi per avere un'accuratezza dei risultati maggiore
 
-        b = matxvet(m, n, x, A[0], &deltat);
+        b = matxvet(m, n, x, A, &deltat);
 
         avgt+=deltat;
 
-        printVec(b, n);
+        // printVec(b, n);
 
     }
 
@@ -58,7 +62,7 @@ int main(int argc, char* argv[]){
     
     free(x);
     free(b);
-    freeint2darray(A);
+    free(A);
 
     return 0;
 }
@@ -89,20 +93,6 @@ double *matxvet(int m, int n, double * restrict x, double * restrict A, double *
 
     return b;
 
-}
-
-double **allocint2darray(int n, int m) {
-    int i;
-    double **ptrs = calloc(n,sizeof(double *));
-    ptrs[0] = calloc(n*m,sizeof(double));
-    for (i=1; i<n; i++) 
-        ptrs[i] = ptrs[i-1] + m;
-    return ptrs;
-}
-
-void freeint2darray(double **a) {
-    free(a[0]);
-    free(a);
 }
 
 void printVec(double* vec, int size) {

@@ -10,7 +10,7 @@
 
 cat $PBS_NODEFILE
 
-PBS_O_WORKDIR=$PBS_O_HOME/prodottomatvet_mpi
+PBS_O_WORKDIR=$PBS_O_HOME/pmatvet_mp
 
 echo ------------------------------------------------------
 echo PBS: qsub is running on $PBS_O_HOST
@@ -25,11 +25,17 @@ echo PBS: current home directory is $PBS_O_HOME
 echo PBS: PATH = $PBS_O_PATH
 echo ------------------------------------------------------
 
-export OMP_NUM_THREADS=2
 export PSC_OMP_AFFINITY=TRUE
 
 gcc -fopenmp -lgomp -o $PBS_O_WORKDIR/pmatvet $PBS_O_WORKDIR/pmatvet.c
 
-$PBS_O_WORKDIR/pmatvet 1000000
+for t in 1 2 4 8
+do
+    for n in 100 1000 10000 
+    do
+        export OMP_NUM_THREADS=$t
+        $PBS_O_WORKDIR/pmatvet $n $n
+    done
+done
 
 echo ------------------------------------------------------
