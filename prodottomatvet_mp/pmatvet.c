@@ -61,16 +61,17 @@ int main(int argc, char* argv[]){
 
         avgt+=deltat;
 
-    }
+        // printVec(b, n);
 
-    printVec(b, n);
+        free(b);
+
+    }
 
     avgt/=10.0;
 
     printf("Test con %d thread, taglia della matrice %dx%d, tempo impiegato medio %e\n", omp_get_max_threads(), n, m, avgt); 
     
     free(x);
-    free(b);
     free(A);
 
     return 0;
@@ -113,7 +114,7 @@ void printVec(double* vec, int size) {
 }
 
 double randomDouble() {
-    double div = RAND_MAX / 100;
-    return (rand() / div);
-    // return 1;
+    // double div = RAND_MAX / 100;
+    // return (rand() / div);
+    return 1;
 }

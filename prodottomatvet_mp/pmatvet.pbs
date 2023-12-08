@@ -36,6 +36,8 @@ do
         export OMP_NUM_THREADS=$t
         $PBS_O_WORKDIR/pmatvet $n $n
     done
+
+    $PBS_O_WORKDIR/pmatvet 100 1000000
 done
 
 echo ------------------------------------------------------
