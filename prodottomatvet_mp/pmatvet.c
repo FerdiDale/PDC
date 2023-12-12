@@ -26,7 +26,7 @@ double *matxvet(int m, int n, double * restrict x, double * restrict A, double *
 //   size: la dimensione del vettore
 void printVec(double* vec, int size);
 
-// Funzione per generare un numero casuale tra 0 e 1 (non utilizzata attualmente)
+// Funzione per generare un numero casuale tra 0 e 100, oppure ritorna 1
 double randomDouble();
 
 int main(int argc, char* argv[]) {
@@ -164,7 +164,7 @@ void printVec(double* vec, int size) {
     printf("\n");
 }
 
-// Implementazione della funzione randomDouble (non utilizzata attualmente)
+// Implementazione della funzione randomDouble
 double randomDouble() {
     // double div = RAND_MAX / 100;
     // return (rand() / div);
