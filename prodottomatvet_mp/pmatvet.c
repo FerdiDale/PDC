@@ -62,7 +62,18 @@ int main(int argc, char* argv[]) {
 
     // Allocazione dinamica della memoria per la matrice A e il vettore x
     A = malloc(n * m * sizeof(double));
+    // Controllo sull'allocazione della memoria della matrice A
+    if (A == NULL) {
+        fprintf(stderr, "%s", "Errore durante l'allocazione della memoria per la matrice A\n");
+        return 1;
+    }
     x = malloc(m * sizeof(double));
+    // Controllo sull'allocazione della memoria del vettore x
+    if (x == NULL) {
+        fprintf(stderr, "%s", "Errore durante l'allocazione della memoria per il vettore x\n");
+        free(A); // Libera la memoria allocata in precedenza
+        return 1;
+    }
 
     // Inizializzazione casuale della matrice A e del vettore x
     for (j = 0; j < m; j++) {
@@ -78,6 +89,10 @@ int main(int argc, char* argv[]) {
     for (iter = 0; iter < 10; iter++) {
         // Chiamata alla funzione matxvet per calcolare il prodotto matrice-vettore
         b = matxvet(m, n, x, A, &deltat);
+        // Se il vettore risultante non è stato allocato, passa alla successiva iterazione
+        if (b == NULL) {
+            continue;
+        }
 
         // Aggiornamento del tempo medio
         avgt += deltat;
@@ -110,6 +125,11 @@ double *matxvet(int m, int n, double * restrict x, double * restrict A, double *
 
     // Allocazione dinamica della memoria per il vettore risultante con inizializzazione a 0 dei valori iniziali
     b = calloc(n, sizeof(double));
+    // Controllo sull'allocazione della memoria del vettore
+    if (b == NULL) {
+        fprintf(stderr, "%s", "Errore durante l'allocazione della memoria per il vettore risultante\n");
+        return NULL;
+    }
 
     // Misurazione del tempo di inizio
     gettimeofday(&time, NULL);
