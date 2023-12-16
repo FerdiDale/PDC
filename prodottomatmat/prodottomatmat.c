@@ -6,6 +6,12 @@
 #include "ex2.h"
 #include "ex3.h"
 
+void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol);
+
+void multiply(int** broadcastA, int** localB, int** localC, int localN);
+
+void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* coordinates, MPI_Comm gridCol);
+
 int main(int argc, char* argv[]) {
 
     int myRank, numProcesses;
@@ -43,7 +49,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    p = sqrt(numProcesses)
+    p = sqrt(numProcesses);
 
     if (totalN % p != 0) {
         if (myRank == 0)
@@ -83,20 +89,12 @@ int main(int argc, char* argv[]) {
     }
 
     for (i = 0; i < localN; i++) {
-            for (j = 0; j < localN; j++) {
-                localC[i][j] = 0;
-            }
+        for (j = 0; j < localN; j++) {
+            localC[i][j] = 0;
         }
+    }
 
     prodottoMatMat(A, B, localA, broadcastA, localB, localC, totalN, localN, numProcesses, p, myRank, coordinates, gridRow, gridCol);
-
-    // Distribuisci la matrice tra i processi
-    // if (myRank == 0)
-    //     prodottoMatVet
-    //     (&(matrix[0][0]), coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol, xVec, xVecLoc, yVec, yVecLoc);
-    // else
-    //     prodottoMatVet
-    //     (NULL, coordinates[0], coordinates[1], myRank, numProcesses, blocks, globalsizes, localsizes, localMatrix, gridRow, gridCol, xVec, xVecLoc, yVec, yVecLoc);
 
     printLocalMatrix(localC, localN, localN, myRank);
 
@@ -121,28 +119,35 @@ int main(int argc, char* argv[]) {
 void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol) {
 
     int k;
+    int gridDims [2] = {p, p};
+    int totalMatrixDims [2] = {totalN, totalN};
+    int localMatrixDims [2] = {localN, localN};
 
     if (myRank == 0) {
-        distributeMatrix(&A[0][0], coordinates[0], coordinates[1], myRank, numProcesses, {p, p}, {totalN, totalN}, {localN, localN}, localA, gridRow, gridCol); //Distribuzione della matrice A
-        distributeMatrix(&B[0][0], coordinates[0], coordinates[1], myRank, numProcesses, {p, p}, {totalN, totalN}, {localN, localN}, localB, gridRow, gridCol); //Distribuzione della matrice B
+        distributeMatrix(&A[0][0], coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localA, gridRow, gridCol); //Distribuzione della matrice A
+        distributeMatrix(&B[0][0], coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localB, gridRow, gridCol); //Distribuzione della matrice B
+    } else {
+        distributeMatrix(NULL, coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localA, gridRow, gridCol); //Distribuzione della matrice A
+        distributeMatrix(NULL, coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localB, gridRow, gridCol); //Distribuzione della matrice B
     }
-    distributeMatrix(NULL, coordinates[0], coordinates[1], myRank, numProcesses, {p, p}, {totalN, totalN}, {localN, localN}, localA, gridRow, gridCol); //Distribuzione della matrice A
-    distributeMatrix(NULL, coordinates[0], coordinates[1], myRank, numProcesses, {p, p}, {totalN, totalN}, {localN, localN}, localB, gridRow, gridCol); //Distribuzione della matrice B
 
     for (k = 0; k < p; k++) { //Algoritmo principale che si ripete sulla k-esima diagonale
 
         //FASE DI BROADCAST
 
-        if (coordinates[1] - coordinates[0] == k) { //I processi sulla k-esima diagonale principale dovranno inviare per primi il proprio blocco locale, quindi broadcastA coincide con localA
+        if ((coordinates[0]+k)%p == coordinates[1]) { //I processi sulla k-esima diagonale principale dovranno inviare per primi il proprio blocco locale, quindi broadcastA coincide con localA
                                                     //I processi sulla diagonale k-esima avranno la differenza tra gli indici j ed i pari a k
             broadcastA = localA;
         }
-        MPI_Bcast(broadcastA[0], localN*localN, MPI_INT, coordinates[0] + k, gridRow); 
+        MPI_Bcast(broadcastA[0], localN*localN, MPI_INT, (coordinates[0] + k)%p, gridRow); 
         //A e' allocata in modo che A[0] punti ad un blocco di memoria contiguo che contiene l'intera matrice
-        //Ad ogni riga, il processo sulla diagonale k-esima (con posizione row+k) inviera' agli altri processi
+        //Ad ogni riga, il processo sulla diagonale k-esima (con posizione row+k mod p) inviera' agli altri processi
 
         //FASE DI MULTIPLY
         multiply(broadcastA, localB, localC, localN);
+
+        if (k == p-1)
+            break; //L'ultimo roll non è necessario, risparmiamo tempo
 
         //FASE DI ROLL
         roll(localB, localN, myRank, numProcesses, p, coordinates, gridCol);
@@ -153,6 +158,7 @@ void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** loca
 
 void multiply(int** broadcastA, int** localB, int** localC, int localN) {
     int i, j, k;
+
     for (i = 0; i < localN; i++) {
         for (j = 0; j < localN; j++) {
             for (k = 0; k < localN; k++) {
@@ -163,6 +169,20 @@ void multiply(int** broadcastA, int** localB, int** localC, int localN) {
 }
 
 void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* coordinates, MPI_Comm gridCol) {
+    MPI_Request sendRequest;
+    int i, colRank;
     int** recvB = allocint2darray(localN, localN);
-    //INVIO ASINCRONO, RICEZIONE ASINCRONA, ATTESA SULLA RICEZIONE, MODIFICO localB
+
+    MPI_Comm_rank(gridCol, &colRank);
+
+    // printf("Ho posizione %d %d, sono originariamente %d ed in colonna %d, INVIO A %d\n", coordinates[0], coordinates[1], myRank, colRank, (colRank+p-1)%p);
+    
+    MPI_Isend(localB[0], localN*localN, MPI_INT, (colRank+p-1)%p, 30+colRank, gridCol, &sendRequest);
+    MPI_Recv(recvB[0], localN*localN, MPI_INT, (colRank+1)%p, 30+((colRank+1)%p), gridCol, NULL);
+    MPI_Wait(&sendRequest, NULL);
+
+    localB[0] = recvB[0];
+    for (i = 1; i < localN; i++) 
+        localB[i] = localB[i-1] + localN; //Facciamo sì che la matrice locale punti alla matrice ricevuta dall'altro processo
+    
 }

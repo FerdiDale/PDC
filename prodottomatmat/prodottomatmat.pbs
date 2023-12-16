@@ -33,4 +33,4 @@ echo "Compilazione di $PBS_O_WORKDIR/prodottomatmat.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c
 
 # Esegui il programma
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -np 8 $PBS_O_WORKDIR/prodottomatmat 2 4 2 4 1
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -np 4 $PBS_O_WORKDIR/prodottomatmat 6
