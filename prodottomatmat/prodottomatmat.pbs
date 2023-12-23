@@ -36,11 +36,14 @@ echo "Compilazione: /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodo
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c
 
 # Esegui il programma
-for n in 100
+for n in 100 500 1000
 do
-    for NCPU in 4
+    for NCPU in 1 4
     do
-        echo "Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat $n"
-        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat $n
+        for iter in 1 2 3 4 5 6 7 8 9 10 
+        do
+            echo "Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat $n"
+            /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat $n
+        done
     done
 done

@@ -118,33 +118,14 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
 
 void printLocalMatrix(int **localMatrix, int localRows, int localCols, int myRank) {
     int i, j;
-    char *buf = NULL;  // Dynamically allocate memory
-    char addbuf[100];
 
-    // Calculate the size needed for buf
-    int bufSize = 1000 + localRows * (localCols * 5 + 1); // Assuming each element is printed in 5 characters
-
-    buf = (char *)malloc(bufSize);
-    if (buf == NULL) {
-        fprintf(stderr, "Error: Memory allocation failed in printLocalMatrix.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    snprintf(buf, bufSize, "Process %d: Local Matrix:\n", myRank);
     for (i = 0; i < localRows; i++) {
         for (j = 0; j < localCols; j++) {
-            snprintf(addbuf, sizeof(addbuf), "%4d", localMatrix[i][j]);
-            strcat(buf, addbuf);
+            printf("%d ", localMatrix[i][j]);
         }
-        snprintf(addbuf, sizeof(addbuf), "\n");
-        strcat(buf, addbuf);
+        printf("\n");
     }
-    snprintf(addbuf, sizeof(addbuf), "\n");
-    strcat(buf, addbuf);
-    printf("%s", buf);
-
-    // Free dynamically allocated memory
-    free(buf);
+    printf("\n");
 }
 
 int **allocint2darray(int n, int m) {

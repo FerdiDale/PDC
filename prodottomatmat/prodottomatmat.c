@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
     int coordinates[2];
     int i, j;
     int p;
+    double start_time, end_time, elapsed_time;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
@@ -119,16 +120,23 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    MPI_Barrier(MPI_COMM_WORLD);
+    start_time = MPI_Wtime(); //Prendiamo il tempo di inizio, dopo aver sincronizzato i vari processi con la precedente Barrier
+
     prodottoMatMat(A, B, localA, broadcastA, localB, localC, totalN, localN, numProcesses, p, myRank, coordinates, gridRow, gridCol);
+    end_time = MPI_Wtime();//Otteniamo il tempo di fine
+
+    elapsed_time = end_time - start_time;
+    MPI_Reduce(&elapsed_time, &total_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD); //Prendiamo il massimo dei tempi calcolati dai vari processi
     
-    /*
-    for(i=0;i<numProcesses;i++){
-        if(myRank==i){
-            printLocalMatrix(localC, localN, localN, myRank);
-        }
-        MPI_Barrier(MPI_COMM_WORLD);
-    }
-    */
+    // for(i=0;i<numProcesses;i++){
+    //     if(myRank==i){
+    //         printLocalMatrix(localC, localN, localN, myRank);
+    //     }
+    //     MPI_Barrier(MPI_COMM_WORLD);
+    // }
+    printf("Dimensione matrice: %dx%d,\nNumero di processi: %d,\nTempo impiegato: %e\n\n\n\n", totalN, totalN, numProcesses, elapsed_time);
+
 
     // Deallocazione della memoria
     if (myRank == 0) {
@@ -225,9 +233,7 @@ void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* co
     MPI_Wait(&sendRequest, MPI_STATUS_IGNORE);
 
     // Copio i dati dalla matrice ricevuta a localB
-    for (i = 0; i < localN; i++) {
-        memcpy(localB[i], recvB[i], localN * sizeof(int));
-    }
+    memcpy(localB[0], recvB[0], localN * sizeof(int));
 
     // Liberare la memoria allocata per recvB
     free(recvB[0]);
