@@ -2,19 +2,22 @@
 
 # PBS directives
 #PBS -q studenti
-#PBS -l nodes=8
+#PBS -l nodes=8:ppn=8
 #PBS -N prodottomatmat
 #PBS -o prodottomatmat.out
 #PBS -e prodottomatmat.err
 
-# Calculate the number of CPUs
+sort -u $PBS_NODEFILE > hostlist
+cat $PBS_NODEFILE
 
+PBS_O_WORKDIR=$PBS_O_HOME/prodottomatmat
+
+# Calculate the number of CPUs
 echo "---------------------------"
 echo "This job is allocated on $NCPU CPU(s)."
 echo "Job is running on node(s):"
 cat hostlist
 
-PBS_O_WORKDIR=$PBS_O_HOME/prodottomatmat
 echo "----------------------"
 echo "PBS: qsub is running on $PBS_O_HOST"
 echo "PBS: originating queue is $PBS_O_QUEUE"
@@ -29,8 +32,15 @@ echo "PBS: PATH = $PBS_O_PATH"
 echo "----------------------"
 
 # Compila il programma C
-echo "Compilazione di $PBS_O_WORKDIR/prodottomatmat.c"
+echo "Compilazione: /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c"
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c
 
 # Esegui il programma
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -np 4 $PBS_O_WORKDIR/prodottomatmat 6
+for n in 100
+do
+    for NCPU in 4
+    do
+        echo "Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat $n"
+        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat $n
+    done
+done

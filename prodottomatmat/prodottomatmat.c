@@ -8,6 +8,8 @@
 
 void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol);
 
+int isPerfectSquare(int num);
+
 void multiply(int** broadcastA, int** localB, int** localC, int localN);
 
 void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* coordinates, MPI_Comm gridCol);
@@ -32,19 +34,27 @@ int main(int argc, char* argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
     MPI_Comm_size(MPI_COMM_WORLD, &numProcesses);
     //N taglia della matrice
+
     if (argc != 2) {
         if (myRank == 0)
-            fprintf(stderr, "%s", "Numero di argomenti inseriti errato\n");
+            fprintf(stderr, "%s", "Errore: numero di argomenti inseriti errato\n");
         MPI_Finalize();
         return 1;
     }
 
     totalN = atoi(argv[1]);
 
-    if ((numProcesses & (numProcesses-1)) != 0) { //numero di processi non potenza di 2, sfruttiamo il codice binario particolare delle potenze di 2, composto da tutti 0 eccetto per un 1
+    if (totalN < 1) { 
+        if (myRank == 0)
+            fprintf(stderr, "%s", "Errore: la dimensione della matrice è non positiva\n");
+        MPI_Finalize();
+        return 1;
+    }
+
+    if (!isPerfectSquare(numProcesses)) { //numero di processi non potenza di 2, sfruttiamo il codice binario particolare delle potenze di 2, composto da tutti 0 eccetto per un 1
             //Se nroc è potenza di 2, nproc-1 sarà quindi composto da tutti 1 fino ad uno 0 laddove nproc aveva il suo unico 1. L'and bit a bit quindi ci restituirà 0.
         if (myRank == 0)
-            fprintf(stderr, "%s", "Il numero di processi deve essere un quadrato perfetto\n");
+            fprintf(stderr, "%s", "Errore: il numero di processi deve essere un quadrato perfetto\n");
         MPI_Finalize();
         return 1;
     }
@@ -53,7 +63,7 @@ int main(int argc, char* argv[]) {
 
     if (totalN % p != 0) {
         if (myRank == 0)
-            fprintf(stderr, "%s", "La taglia della matrice quadrata deve essere multiplo della taglia della griglia di processi\n");
+            fprintf(stderr, "%s", "Errore: la taglia della matrice quadrata deve essere multiplo della taglia della griglia di processi\n");
         MPI_Finalize();
         return 1;
     }
@@ -69,11 +79,26 @@ int main(int argc, char* argv[]) {
     if (myRank == 0) {
         A = allocint2darray(totalN, totalN);
         B = allocint2darray(totalN, totalN);
+
+        // Verifica se le allocazioni sono riuscite
+        if (A == NULL || B == NULL) {
+            fprintf(stderr, "Errore: Allocazione di memoria per A o B non riuscita.\n");
+            MPI_Finalize();
+            return 1;
+        }
     }
+
     localA = allocint2darray(localN, localN);
     localB = allocint2darray(localN, localN);
     localC = allocint2darray(localN, localN);
     broadcastA = allocint2darray(localN, localN);
+
+    // Verifica se le allocazioni sono riuscite
+    if (localA == NULL || localB == NULL || localC == NULL || broadcastA == NULL) {
+        fprintf(stderr, "Errore: Allocazione di memoria per matrici locali non riuscita.\n");
+        MPI_Finalize();
+        return 1;
+    }
 
     // Inizializza la matrice sul processo radice (rank 0)
     if (myRank == 0) {
@@ -84,8 +109,8 @@ int main(int argc, char* argv[]) {
             }
         }
         // Stampa la matrice totale
-        printLocalMatrix(A, totalN, totalN, myRank);
-        printLocalMatrix(B, totalN, totalN, myRank);
+        // printLocalMatrix(A, totalN, totalN, myRank);
+        // printLocalMatrix(B, totalN, totalN, myRank);
     }
 
     for (i = 0; i < localN; i++) {
@@ -95,14 +120,15 @@ int main(int argc, char* argv[]) {
     }
 
     prodottoMatMat(A, B, localA, broadcastA, localB, localC, totalN, localN, numProcesses, p, myRank, coordinates, gridRow, gridCol);
-
+    
+    /*
     for(i=0;i<numProcesses;i++){
         if(myRank==i){
             printLocalMatrix(localC, localN, localN, myRank);
         }
         MPI_Barrier(MPI_COMM_WORLD);
     }
-    
+    */
 
     // Deallocazione della memoria
     if (myRank == 0) {
@@ -162,6 +188,14 @@ void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** loca
 
 }
 
+int isPerfectSquare(int num) {
+    // Calcola la radice quadrata
+    double squareRoot = sqrt((double)num);
+
+    // Verifica se la radice quadrata è un numero intero
+    return squareRoot == floor(squareRoot);
+}
+
 void multiply(int** broadcastA, int** localB, int** localC, int localN) {
     int i, j, k;
 
@@ -181,14 +215,22 @@ void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* co
 
     MPI_Comm_rank(gridCol, &colRank);
 
-    // printf("Ho posizione %d %d, sono originariamente %d ed in colonna %d, INVIO A %d\n", coordinates[0], coordinates[1], myRank, colRank, (colRank+p-1)%p);
+    // Invio la matrice locale alla riga inferiore
+    MPI_Isend(localB[0], localN * localN, MPI_INT, (colRank + p - 1) % p, 30 + colRank, gridCol, &sendRequest);
     
-    MPI_Isend(localB[0], localN*localN, MPI_INT, (colRank+p-1)%p, 30+colRank, gridCol, &sendRequest);
-    MPI_Recv(recvB[0], localN*localN, MPI_INT, (colRank+1)%p, 30+((colRank+1)%p), gridCol, NULL);
-    MPI_Wait(&sendRequest, NULL);
+    // Ricevo la matrice locale dalla riga inferiore
+    MPI_Recv(recvB[0], localN * localN, MPI_INT, (colRank + 1) % p, 30 + ((colRank + 1) % p), gridCol, MPI_STATUS_IGNORE);
+    
+    // Attendo la fine dell'invio
+    MPI_Wait(&sendRequest, MPI_STATUS_IGNORE);
 
-    localB[0] = recvB[0];
-    for (i = 1; i < localN; i++) 
-        localB[i] = localB[i-1] + localN; //Facciamo sì che la matrice locale punti alla matrice ricevuta dall'altro processo
-    
+    // Copio i dati dalla matrice ricevuta a localB
+    for (i = 0; i < localN; i++) {
+        memcpy(localB[i], recvB[i], localN * sizeof(int));
+    }
+
+    // Liberare la memoria allocata per recvB
+    free(recvB[0]);
+    free(recvB);
 }
+

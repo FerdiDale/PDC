@@ -1,3 +1,5 @@
+#include <mpi.h>
+#include "prodottomatvet.h"
 void prodottoMatVet(int* globalptr, const int myrow, const int mycol, const int myRank, const int nproc,
     const int blocks[2], const int globalsizes[2], const int localsizes[2],
     int** localdata, MPI_Comm rowComm, MPI_Comm colComm, int* xVec, int* xVecLoc, int* yVec, int* yVecLoc);
@@ -9,6 +11,7 @@ void printvec(int* vec, int size, int myRank);
 
 void gatherVector(int* locVec, int* totalVec, MPI_Comm communicator, int nsend, int nProc, int N);
 
+/*
 int main(int argc, char* argv[]) {
 
     int myRank, numProcesses;
@@ -139,6 +142,7 @@ int main(int argc, char* argv[]) {
     return 0;
 
 }
+*/
 
 void prodottoMatVet(int* globalptr, const int myrow, const int mycol, const int myRank, const int nproc,
     const int blocks[2], const int globalsizes[2], const int localsizes[2],
