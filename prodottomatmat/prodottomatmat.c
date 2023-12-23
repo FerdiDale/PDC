@@ -96,7 +96,13 @@ int main(int argc, char* argv[]) {
 
     prodottoMatMat(A, B, localA, broadcastA, localB, localC, totalN, localN, numProcesses, p, myRank, coordinates, gridRow, gridCol);
 
-    printLocalMatrix(localC, localN, localN, myRank);
+    for(i=0;i<numProcesses;i++){
+        if(myRank==i){
+            printLocalMatrix(localC, localN, localN, myRank);
+        }
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
+    
 
     // Deallocazione della memoria
     if (myRank == 0) {
