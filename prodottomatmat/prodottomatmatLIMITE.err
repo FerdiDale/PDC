@@ -1,0 +1,7 @@
+/homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat.c: In function ‘roll’:
+/homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat.c:235: warning: ‘return’ with a value, in function returning void
+Errore: numero di argomenti inseriti errato
+Errore: la dimensione della matrice è non positiva
+Errore: il numero di processi deve essere un quadrato perfetto
+Errore: la taglia della matrice quadrata deve essere multiplo della taglia della griglia di processi
+Errore: Allocazione di memoria per matrici locali non riuscita.
