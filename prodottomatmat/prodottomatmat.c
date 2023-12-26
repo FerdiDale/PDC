@@ -6,7 +6,7 @@
 #include "ex2.h"
 #include "ex3.h"
 
-void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol, double* total_time);
+void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol);
 
 int isPerfectSquare(int num);
 
@@ -29,7 +29,6 @@ int main(int argc, char* argv[]) {
     int coordinates[2];
     int i, j;
     int p;
-    double total_time;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
@@ -120,7 +119,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    prodottoMatMat(A, B, localA, broadcastA, localB, localC, totalN, localN, numProcesses, p, myRank, coordinates, gridRow, gridCol, &total_time);
+    prodottoMatMat(A, B, localA, broadcastA, localB, localC, totalN, localN, numProcesses, p, myRank, coordinates, gridRow, gridCol);
     
     if (totalN <= 20) {
         for(i=0;i<numProcesses;i++){
@@ -130,10 +129,6 @@ int main(int argc, char* argv[]) {
             MPI_Barrier(MPI_COMM_WORLD);
         }
     }
-
-    if (myRank == 0)
-        printf("Dimensione matrice: %dx%d,\nNumero di processi: %d,\nTempo impiegato: %e\n\n\n\n", totalN, totalN, numProcesses, total_time);
-
 
     // Deallocazione della memoria
     if (myRank == 0) {
@@ -153,13 +148,13 @@ int main(int argc, char* argv[]) {
 
 }
 
-void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol, double* total_time) {
+void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol) {
 
-    int k;
+    int k, iter;
     int gridDims [2] = {p, p};
     int totalMatrixDims [2] = {totalN, totalN};
     int localMatrixDims [2] = {localN, localN};
-    int start_time, end_time, elapsed_time;
+    double start_time, end_time, elapsed_time, total_time;
 
     if (myRank == 0) {
         distributeMatrix(&A[0][0], coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localA, gridRow, gridCol); //Distribuzione della matrice A
@@ -169,38 +164,44 @@ void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** loca
         distributeMatrix(NULL, coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localB, gridRow, gridCol); //Distribuzione della matrice B
     }
 
-    MPI_Barrier(MPI_COMM_WORLD);
-    start_time = MPI_Wtime(); //Prendiamo il tempo di inizio, dopo aver sincronizzato i vari processi con la precedente Barrier
+    for (iter = 0; iter < 10; iter++) { //Ripetiamo l'intero processo 10 volte per avere una misura del tempo di esecuzione piu' accurata
 
-    for (k = 0; k < p; k++) { //Algoritmo principale che si ripete sulla k-esima diagonale
+        MPI_Barrier(MPI_COMM_WORLD);
+        start_time = MPI_Wtime(); //Prendiamo il tempo di inizio, dopo aver sincronizzato i vari processi con la precedente Barrier
 
-        //FASE DI BROADCAST
+        for (k = 0; k < p; k++) { //Algoritmo principale che si ripete sulla k-esima diagonale
 
-        if ((coordinates[0]+k)%p == coordinates[1]) { //I processi sulla k-esima diagonale principale dovranno inviare per primi il proprio blocco locale, quindi broadcastA coincide con localA
-                                                    //I processi sulla diagonale k-esima avranno la differenza tra gli indici j ed i pari a k
-            broadcastA = localA;
+            //FASE DI BROADCAST
+
+            if ((coordinates[0]+k)%p == coordinates[1]) { //I processi sulla k-esima diagonale principale dovranno inviare per primi il proprio blocco locale, quindi broadcastA coincide con localA
+                                                        //I processi sulla diagonale k-esima avranno la differenza tra gli indici j ed i pari a k
+                broadcastA = localA;
+            }
+            MPI_Bcast(broadcastA[0], localN*localN, MPI_INT, (coordinates[0] + k)%p, gridRow); 
+            //A e' allocata in modo che A[0] punti ad un blocco di memoria contiguo che contiene l'intera matrice
+            //Ad ogni riga, il processo sulla diagonale k-esima (con posizione row+k mod p) inviera' agli altri processi
+
+            //FASE DI MULTIPLY
+            multiply(broadcastA, localB, localC, localN);
+
+            if (k == p-1)
+                break; //L'ultimo roll non è necessario, risparmiamo tempo
+
+            //FASE DI ROLL
+            roll(localB, localN, myRank, numProcesses, p, coordinates, gridCol);
+
         }
-        MPI_Bcast(broadcastA[0], localN*localN, MPI_INT, (coordinates[0] + k)%p, gridRow); 
-        //A e' allocata in modo che A[0] punti ad un blocco di memoria contiguo che contiene l'intera matrice
-        //Ad ogni riga, il processo sulla diagonale k-esima (con posizione row+k mod p) inviera' agli altri processi
 
-        //FASE DI MULTIPLY
-        multiply(broadcastA, localB, localC, localN);
 
-        if (k == p-1)
-            break; //L'ultimo roll non è necessario, risparmiamo tempo
+        end_time = MPI_Wtime();//Otteniamo il tempo di fine
 
-        //FASE DI ROLL
-        roll(localB, localN, myRank, numProcesses, p, coordinates, gridCol);
+        elapsed_time = end_time - start_time;
+        MPI_Reduce(&elapsed_time, &total_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD); //Prendiamo il massimo dei tempi calcolati dai vari processi
+
+        if (myRank == 0)
+            printf("Dimensione matrice: %dx%d,\nNumero di processi: %d,\nTempo impiegato: %e\n\n\n\n", totalN, totalN, numProcesses, total_time);
 
     }
-
-
-    end_time = MPI_Wtime();//Otteniamo il tempo di fine
-
-    elapsed_time = end_time - start_time;
-    printf("Prova %d", elapsed_time);
-    MPI_Reduce(&elapsed_time, total_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD); //Prendiamo il massimo dei tempi calcolati dai vari processi
 
 }
 

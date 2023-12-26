@@ -2,4 +2,4 @@ sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oH
 
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss DLSFDN02S@ui-studenti.scope.unina.it
 
-sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss DLSFDN02S@ui-studenti.scope.unina.it:sommanumeri/sommas1p1.out .
+sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss DLSFDN02S@ui-studenti.scope.unina.it:prodottomatmat/prodottomatmat.out .

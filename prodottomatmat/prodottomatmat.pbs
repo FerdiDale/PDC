@@ -3,9 +3,9 @@
 # PBS directives
 #PBS -q studenti
 #PBS -l nodes=8:ppn=8
-#PBS -N prodottomatmat1
-#PBS -o prodottomatmat1.out
-#PBS -e prodottomatmat1.err
+#PBS -N prodottomatmat
+#PBS -o prodottomatmat.out
+#PBS -e prodottomatmat.err
 
 sort -u $PBS_NODEFILE > hostlist
 cat $PBS_NODEFILE
@@ -32,18 +32,15 @@ echo "PBS: PATH = $PBS_O_PATH"
 echo "----------------------"
 
 # Compila il programma C
-echo "Compilazione: /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat1 $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c"
-/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat1 $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c
+echo "Compilazione: /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c"
+/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c
 
 # Esegui il programma
-for n in 100 500 
+for n in 100 500 1000
 do
     for NCPU in 1 4
     do
-        for iter in 1 2 3 4 5 6 7 8 9 10 
-        do
-            echo "Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat1 $n"
-            /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat1 $n
-        done
+        echo "Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat $n"
+        /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np $NCPU $PBS_O_WORKDIR/prodottomatmat $n
     done
 done

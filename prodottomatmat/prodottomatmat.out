@@ -1,0 +1,454 @@
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn280.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn279.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn278.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn277.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn276.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn275.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn274.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+wn273.scope.unina.it
+---------------------------
+This job is allocated on  CPU(s).
+Job is running on node(s):
+wn273.scope.unina.it
+wn274.scope.unina.it
+wn275.scope.unina.it
+wn276.scope.unina.it
+wn277.scope.unina.it
+wn278.scope.unina.it
+wn279.scope.unina.it
+wn280.scope.unina.it
+----------------------
+PBS: qsub is running on ui-studenti.scope.unina.it
+PBS: originating queue is studenti
+PBS: executing queue is studenti
+PBS: working directory is /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 4020255.torque02.scope.unina.it
+PBS: job name is prodottomatmat1
+PBS: node file is /var/spool/pbs/aux//4020255.torque02.scope.unina.it
+PBS: current home directory is /homes/DMA/PDC/2024/DLSFDN02S
+PBS: PATH = /usr/lib64/openmpi/1.2.7-gcc/bin:/usr/kerberos/bin:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/mpirt/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/bin/intel64_mic:/opt/exp_soft/unina.it/intel/composer_xe_2013_sp1.3.174/debugger/gui/intel64:/opt/d-cache/srm/bin:/opt/d-cache/dcap/bin:/opt/edg/bin:/opt/glite/bin:/opt/globus/bin:/opt/lcg/bin:/usr/local/bin:/bin:/usr/bin:/opt/exp_soft/HADOOP/hadoop-1.0.3/bin:/opt/exp_soft/unina.it/intel/composerxe/bin/intel64/:/opt/exp_soft/unina.it/MPJExpress/mpj-v0_38/bin:/homes/DMA/PDC/2024/DLSFDN02S/bin
+----------------------
+Compilazione: /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat1 /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat.c /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/ex2.c /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/ex3.c
+Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 1 /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat1 100
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.017189e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.018214e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.020312e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.022005e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.017499e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.017284e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.017714e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.018715e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.017904e-02
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 1,
+Tempo impiegato: 1.017189e-02
+
+
+
+Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat1 100
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 3.378868e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 3.000975e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 3.273964e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 2.969027e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 2.629995e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 2.578974e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 2.569914e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 2.573013e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 2.573013e-03
+
+
+
+Dimensione matrice: 100x100,
+Numero di processi: 4,
+Tempo impiegato: 2.574921e-03
+
+
+
+Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 1 /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat1 500
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.464627e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.464065e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.461988e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.463562e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.462608e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.462983e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.462031e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.463486e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.462174e+00
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 1,
+Tempo impiegato: 1.463240e+00
+
+
+
+Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat1 500
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.202319e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.193009e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.190370e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.191011e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.189709e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.192458e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.190770e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.189800e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.190060e-01
+
+
+
+Dimensione matrice: 500x500,
+Numero di processi: 4,
+Tempo impiegato: 3.190501e-01
+
+
+
+Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 1 /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat1 1000
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.391061e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.390716e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.390790e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.390487e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.390344e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.390243e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.390402e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.390170e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.391640e+01
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 1,
+Tempo impiegato: 1.390326e+01
+
+
+
+Esecuzione: /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 /homes/DMA/PDC/2024/DLSFDN02S/prodottomatmat/prodottomatmat1 1000
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.935790e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.934997e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.934539e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.934658e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.934839e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.934675e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.934548e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.934693e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.933208e+00
+
+
+
+Dimensione matrice: 1000x1000,
+Numero di processi: 4,
+Tempo impiegato: 2.932874e+00
+
+
+
