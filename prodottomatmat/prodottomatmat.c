@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
         // Verifica se le allocazioni sono riuscite
         if (A == NULL || B == NULL) {
             fprintf(stderr, "Errore: Allocazione di memoria per A o B non riuscita.\n");
-            MPI_Finalize();
+            MPI_Abort(MPI_COMM_WORLD, 1); // Abort all MPI processes
             return 1;
         }
     }
@@ -229,7 +229,12 @@ void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* co
     MPI_Request sendRequest;
     int i, colRank;
     int** recvB = allocint2darray(localN, localN);
-
+    if (recvB == NULL)
+    {
+        fprintf(stderr, "Errore: Allocazione di memoria per matrice B non riuscita.\n");
+        MPI_Finalize();
+        return 1;
+    }
     MPI_Comm_rank(gridCol, &colRank);
 
     // Invio la matrice locale alla riga inferiore

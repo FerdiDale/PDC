@@ -58,7 +58,7 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
             if (row < remainingRows) {
                 sendcounts[row]++;
             }
-            sendcounts[row] *= globalsizes[1];
+            // sendcounts[row] *= globalsizes[1];
             if (row > 0)
                 senddispls[row] = senddispls[row - 1] + sendcounts[row - 1];
         }
@@ -66,7 +66,8 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
         /* allocare i dati della mia riga */
         rowdata = allocint2darray(sendcounts[myrow], globalsizes[1]);
         if (rowdata == NULL) {
-            MPI_Finalize();
+            fprintf(stderr, "Errore processore=%dx%d: Allocazione di memoria per la matrice rowdata %dx%d non riuscita.\n", myrow, mycol, sendcounts[myrow], globalsizes[1]);
+            MPI_Abort(MPI_COMM_WORLD, 1); // Abort all MPI processes
             exit(1);
         }
 
