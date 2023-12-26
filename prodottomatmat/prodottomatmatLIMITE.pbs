@@ -58,3 +58,7 @@ echo ""
 echo "Esecuzione con numero di processori 4, taglia della matrice 4x4"
 /usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 $PBS_O_WORKDIR/prodottomatmat 4
 echo ""
+
+echo "Esecuzione con numero di processori 9, taglia della matrice 6x6"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 9 $PBS_O_WORKDIR/prodottomatmat 6
+echo ""
