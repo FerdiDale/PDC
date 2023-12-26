@@ -95,9 +95,10 @@ int main(int argc, char* argv[]) {
 
     // Verifica se le allocazioni sono riuscite
     if (localA == NULL || localB == NULL || localC == NULL || broadcastA == NULL) {
-        fprintf(stderr, "Errore: Allocazione di memoria per matrici locali non riuscita.\n");
+        if (myRank == 0)
+            fprintf(stderr, "Errore: Allocazione di memoria per matrici locali non riuscita.\n");
         MPI_Finalize();
-        return 1;
+        exit(1);
     }
 
     // Inizializza la matrice sul processo radice (rank 0)
@@ -109,8 +110,10 @@ int main(int argc, char* argv[]) {
             }
         }
         // Stampa la matrice totale
-        // printLocalMatrix(A, totalN, totalN, myRank);
-        // printLocalMatrix(B, totalN, totalN, myRank);
+        if (totalN <= 20) {
+            printLocalMatrix(A, totalN, totalN, myRank);
+            printLocalMatrix(B, totalN, totalN, myRank);
+        }
     }
 
     for (i = 0; i < localN; i++) {
@@ -231,7 +234,7 @@ void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* co
     int** recvB = allocint2darray(localN, localN);
     if (recvB == NULL)
     {
-        fprintf(stderr, "Errore: Allocazione di memoria per matrice B non riuscita.\n");
+        fprintf(stderr, "Errore: Allocazione di memoria per matrice ausiliaria B per il roll non riuscita.\n");
         MPI_Finalize();
         return 1;
     }
