@@ -14,6 +14,8 @@ void multiply(int** broadcastA, int** localB, int** localC, int localN);
 
 void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* coordinates, MPI_Comm gridCol);
 
+void saveResultsToCSV(int dim, int numP, double time);
+
 int main(int argc, char* argv[]) {
 
     int myRank, numProcesses;
@@ -199,9 +201,10 @@ void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** loca
     elapsed_time = end_time - start_time;
     MPI_Reduce(&elapsed_time, &total_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD); //Prendiamo il massimo dei tempi calcolati dai vari processi
 
-    if (myRank == 0)
+    if (myRank == 0) {
         printf("Dimensione matrice: %dx%d,\nNumero di processi: %d,\nTempo impiegato: %e\n\n\n\n", totalN, totalN, numProcesses, total_time);
-
+        saveResultsToCSV(totalN, numProcesses, elapsed_time);
+    }
 }
 
 int isPerfectSquare(int num) {
@@ -231,8 +234,7 @@ void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* co
     if (recvB == NULL)
     {
         fprintf(stderr, "Errore: Allocazione di memoria per matrice ausiliaria B per il roll non riuscita.\n");
-        MPI_Finalize();
-        return 1;
+        MPI_Abort( MPI_COMM_WORLD, 1);
     }
     MPI_Comm_rank(gridCol, &colRank);
 
@@ -253,3 +255,22 @@ void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* co
     free(recvB);
 }
 
+// Questa funzione salva i risultati delle prestazioni in un file CSV
+void saveResultsToCSV(int dim, int numP, double time) {
+    // Apri il file CSV in modalità append
+    FILE *file = fopen("results.csv", "a");
+    if (file == NULL) {
+        // Se si verifica un errore nell'apertura del file, stampa un messaggio di errore
+        perror("Errore nell'apertura del file 'results.csv'");
+        return;
+    }
+
+    // Scrivi i dati dei risultati nel file CSV in formato "n, p, time"
+    fprintf(file, "%d, %d, %e\n", dim, numP, time);
+
+    // Chiudi il file dopo aver scritto i dati
+    if (fclose(file) != 0) {
+        // Se si verifica un errore nella chiusura del file, stampa un messaggio di errore
+        perror("Errore nella chiusura del file 'results.csv'");
+    }
+}
