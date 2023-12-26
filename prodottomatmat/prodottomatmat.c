@@ -6,7 +6,7 @@
 #include "ex2.h"
 #include "ex3.h"
 
-void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol);
+void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol, double* total_time);
 
 int isPerfectSquare(int num);
 
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
     int coordinates[2];
     int i, j;
     int p;
-    double start_time, end_time, elapsed_time;
+    double total_time;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
@@ -120,22 +120,19 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    MPI_Barrier(MPI_COMM_WORLD);
-    start_time = MPI_Wtime(); //Prendiamo il tempo di inizio, dopo aver sincronizzato i vari processi con la precedente Barrier
-
-    prodottoMatMat(A, B, localA, broadcastA, localB, localC, totalN, localN, numProcesses, p, myRank, coordinates, gridRow, gridCol);
-    end_time = MPI_Wtime();//Otteniamo il tempo di fine
-
-    elapsed_time = end_time - start_time;
-    MPI_Reduce(&elapsed_time, &total_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD); //Prendiamo il massimo dei tempi calcolati dai vari processi
+    prodottoMatMat(A, B, localA, broadcastA, localB, localC, totalN, localN, numProcesses, p, myRank, coordinates, gridRow, gridCol, &total_time);
     
-    // for(i=0;i<numProcesses;i++){
-    //     if(myRank==i){
-    //         printLocalMatrix(localC, localN, localN, myRank);
-    //     }
-    //     MPI_Barrier(MPI_COMM_WORLD);
-    // }
-    printf("Dimensione matrice: %dx%d,\nNumero di processi: %d,\nTempo impiegato: %e\n\n\n\n", totalN, totalN, numProcesses, elapsed_time);
+    if (totalN <= 20) {
+        for(i=0;i<numProcesses;i++){
+            if(myRank==i){
+                printLocalMatrix(localC, localN, localN, myRank);
+            }
+            MPI_Barrier(MPI_COMM_WORLD);
+        }
+    }
+
+    if (myRank == 0)
+        printf("Dimensione matrice: %dx%d,\nNumero di processi: %d,\nTempo impiegato: %e\n\n\n\n", totalN, totalN, numProcesses, total_time);
 
 
     // Deallocazione della memoria
@@ -156,12 +153,13 @@ int main(int argc, char* argv[]) {
 
 }
 
-void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol) {
+void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** localB, int** localC, int totalN, int localN, int numProcesses, int p, int myRank, int* coordinates, MPI_Comm gridRow, MPI_Comm gridCol, double* total_time) {
 
     int k;
     int gridDims [2] = {p, p};
     int totalMatrixDims [2] = {totalN, totalN};
     int localMatrixDims [2] = {localN, localN};
+    int start_time, end_time, elapsed_time;
 
     if (myRank == 0) {
         distributeMatrix(&A[0][0], coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localA, gridRow, gridCol); //Distribuzione della matrice A
@@ -170,6 +168,9 @@ void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** loca
         distributeMatrix(NULL, coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localA, gridRow, gridCol); //Distribuzione della matrice A
         distributeMatrix(NULL, coordinates[0], coordinates[1], myRank, numProcesses, gridDims, totalMatrixDims, localMatrixDims, localB, gridRow, gridCol); //Distribuzione della matrice B
     }
+
+    MPI_Barrier(MPI_COMM_WORLD);
+    start_time = MPI_Wtime(); //Prendiamo il tempo di inizio, dopo aver sincronizzato i vari processi con la precedente Barrier
 
     for (k = 0; k < p; k++) { //Algoritmo principale che si ripete sulla k-esima diagonale
 
@@ -193,6 +194,13 @@ void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** loca
         roll(localB, localN, myRank, numProcesses, p, coordinates, gridCol);
 
     }
+
+
+    end_time = MPI_Wtime();//Otteniamo il tempo di fine
+
+    elapsed_time = end_time - start_time;
+    printf("Prova %d", elapsed_time);
+    MPI_Reduce(&elapsed_time, total_time, 1, MPI_DOUBLE, MPI_MAX, 0, MPI_COMM_WORLD); //Prendiamo il massimo dei tempi calcolati dai vari processi
 
 }
 

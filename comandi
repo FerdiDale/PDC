@@ -1,4 +1,4 @@
-sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss es3.c esmatrix.pbs DLSFDN02S@ui-studenti.scope.unina.it:esmatrix
+sshpass -f "/home/ferdi/psw" scp -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss * DLSFDN02S@ui-studenti.scope.unina.it:prodottomatmat
 
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -oHostKeyAlgorithms=+ssh-dss DLSFDN02S@ui-studenti.scope.unina.it
 

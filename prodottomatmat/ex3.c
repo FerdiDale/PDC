@@ -45,6 +45,10 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
     if (mycol == 0) {
         int *sendcounts = (int *)malloc(blocks[0] * sizeof(int));
         int *senddispls = (int *)malloc(blocks[0] * sizeof(int));
+        if (sendcounts == NULL || senddispls == NULL) {
+            fprintf(stderr, "Errore: Allocazione di memoria di un vettore ausiliario non riuscita.\n");
+            return;
+        }
         senddispls[0] = 0;
 
         for (row = 0; row < blocks[0]; row++) {
@@ -60,9 +64,12 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
 
         /* allocare i dati della mia riga */
         rowdata = allocint2darray(sendcounts[myrow], globalsizes[1]);
+        if (rowdata == NULL)
+            return;
 
         /* eseguire la distribuzione delle righe */
         // printf("\nProcesso=%d : Prima dello scatter di righe\n", rank);
+        MPI_Barrier(MPI_COMM_WORLD);
         MPI_Scatterv(globalptr, sendcounts, senddispls, MPI_INT,
                      &(rowdata[0][0]), sendcounts[myrow], MPI_INT, 0, colComm);
 
@@ -88,6 +95,10 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
 
     int *sendcounts = (int *)malloc(blocks[1] * sizeof(int));
     int *senddispls = (int *)malloc(blocks[1] * sizeof(int));
+    if (sendcounts == NULL || senddispls == NULL) {
+        fprintf(stderr, "Errore: Allocazione di memoria di un vettore ausiliario non riuscita.\n");
+        return;
+    }
     senddispls[0] = 0;
     for (col = 0; col < blocks[1]; col++) {
         sendcounts[col] = colBlocksize;
@@ -132,6 +143,10 @@ int **allocint2darray(int n, int m) {
     int i;
     int **ptrs = calloc(n,sizeof(int *));
     ptrs[0] = calloc(n*m,sizeof(int));
+    if (ptrs[0] == NULL) {
+        fprintf(stderr, "Errore: Allocazione di memoria di una matrice non riuscita.\n");
+        return NULL;
+    }
     for (i=1; i<n; i++) 
         ptrs[i] = ptrs[i-1] + m;
     return ptrs;
