@@ -66,6 +66,7 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
         /* allocare i dati della mia riga */
         rowdata = allocint2darray(sendcounts[myrow], globalsizes[1]);
         if (rowdata == NULL) {
+            fprintf(stderr, "Errore: Allocazione di memoria di una matrice ausiliaria non riuscita.\n");
             MPI_Finalize();
             exit(1);
         }
@@ -145,11 +146,11 @@ void printLocalMatrix(int **localMatrix, int localRows, int localCols, int myRan
 int **allocint2darray(int n, int m) {
     int i;
     int **ptrs = calloc(n,sizeof(int *));
-    ptrs[0] = calloc(n*m,sizeof(int));
-    if (ptrs[0] == NULL) {
-        fprintf(stderr, "Errore: Allocazione di memoria di una matrice non riuscita.\n");
+    if (ptrs == NULL)
         return NULL;
-    }
+    ptrs[0] = calloc(n*m,sizeof(int));
+    if (ptrs[0] == NULL)
+        return NULL;
     for (i=1; i<n; i++) 
         ptrs[i] = ptrs[i-1] + m;
     return ptrs;

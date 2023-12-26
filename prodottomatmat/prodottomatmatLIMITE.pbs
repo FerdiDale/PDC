@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# PBS directives
+#PBS -q studenti
+#PBS -l nodes=8:ppn=8
+#PBS -N prodottomatmat
+#PBS -o prodottomatmatLIMITE.out
+#PBS -e prodottomatmatLIMITE.err
+
+sort -u $PBS_NODEFILE > hostlist
+cat $PBS_NODEFILE
+
+PBS_O_WORKDIR=$PBS_O_HOME/prodottomatmat
+
+# Calculate the number of CPUs
+echo "---------------------------"
+echo "This job is allocated on $NCPU CPU(s)."
+echo "Job is running on node(s):"
+cat hostlist
+
+echo "----------------------"
+echo "PBS: qsub is running on $PBS_O_HOST"
+echo "PBS: originating queue is $PBS_O_QUEUE"
+echo "PBS: executing queue is $PBS_QUEUE"
+echo "PBS: working directory is $PBS_O_WORKDIR"
+echo "PBS: execution mode is $PBS_ENVIRONMENT"
+echo "PBS: job identifier is $PBS_JOBID"
+echo "PBS: job name is $PBS_JOBNAME"
+echo "PBS: node file is $PBS_NODEFILE"
+echo "PBS: current home directory is $PBS_O_HOME"
+echo "PBS: PATH = $PBS_O_PATH"
+echo "----------------------"
+
+# Compila il programma C
+echo "Compilazione: /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c"
+/usr/lib64/openmpi/1.4-gcc/bin/mpicc -o $PBS_O_WORKDIR/prodottomatmat $PBS_O_WORKDIR/prodottomatmat.c $PBS_O_WORKDIR/ex2.c $PBS_O_WORKDIR/ex3.c
+
+echo "Esecuzione con numero di processori 4, taglia della matrice assente"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 $PBS_O_WORKDIR/prodottomatmat
+echo ""
+
+echo "Esecuzione con numero di processori 4, taglia della matrice 0x0"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 $PBS_O_WORKDIR/prodottomatmat 0
+echo ""
+
+echo "Esecuzione con numero di processori 8, taglia della matrice 1x1"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 8 $PBS_O_WORKDIR/prodottomatmat 1
+echo ""
+
+echo "Esecuzione con numero di processori 4, taglia della matrice 5x5"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 $PBS_O_WORKDIR/prodottomatmat 5
+echo ""
+
+echo "Esecuzione con numero di processori 4, taglia della matrice 100000x100000"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 $PBS_O_WORKDIR/prodottomatmat 100000
+echo ""
+
+echo "Esecuzione con numero di processori 4, taglia della matrice 4x4"
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile hostlist -np 4 $PBS_O_WORKDIR/prodottomatmat 4
+echo ""
