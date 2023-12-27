@@ -176,7 +176,7 @@ void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** loca
 
         //FASE DI BROADCAST
 
-        if ((coordinates[0]+k)%p == coordinates[1]) { //I processi sulla k-esima diagonale principale dovranno inviare per primi il proprio blocco locale, quindi broadcastA coincide con localA
+        if ((coordinates[0] + k)%p == coordinates[1]) { //I processi sulla k-esima diagonale principale dovranno inviare per primi il proprio blocco locale, quindi broadcastA coincide con localA
                                                     //I processi sulla diagonale k-esima avranno la differenza tra gli indici j ed i pari a k
             broadcastA = localA;
         }
