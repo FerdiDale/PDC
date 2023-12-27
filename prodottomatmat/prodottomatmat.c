@@ -53,8 +53,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    if (!isPerfectSquare(numProcesses)) { //numero di processi non potenza di 2, sfruttiamo il codice binario particolare delle potenze di 2, composto da tutti 0 eccetto per un 1
-            //Se nroc è potenza di 2, nproc-1 sarà quindi composto da tutti 1 fino ad uno 0 laddove nproc aveva il suo unico 1. L'and bit a bit quindi ci restituirà 0.
+    if (!isPerfectSquare(numProcesses)) { //Controlliamo il numero di processi sia un quadrato perfetto facendone la radice quadrata e verificando sia intera
         if (myRank == 0)
             fprintf(stderr, "%s", "Errore: il numero di processi deve essere un quadrato perfetto\n");
         MPI_Finalize();
@@ -63,7 +62,7 @@ int main(int argc, char* argv[]) {
 
     p = sqrt(numProcesses);
 
-    if (totalN % p != 0) {
+    if (totalN % p != 0) { //Per semplicita' di calcolo la matrice deve avere una dimensione multiplo della taglia della griglia di processi utilizzata
         if (myRank == 0)
             fprintf(stderr, "%s", "Errore: la taglia della matrice quadrata deve essere multiplo della taglia della griglia di processi\n");
         MPI_Finalize();
@@ -177,7 +176,8 @@ void prodottoMatMat(int** A, int** B, int** localA, int** broadcastA, int** loca
         //FASE DI BROADCAST
 
         if ((coordinates[0] + k)%p == coordinates[1]) { //I processi sulla k-esima diagonale principale dovranno inviare per primi il proprio blocco locale, quindi broadcastA coincide con localA
-                                                    //I processi sulla diagonale k-esima avranno la differenza tra gli indici j ed i pari a k
+                                                    //I processi sulla diagonale k-esima avranno la "differenza ciclica" tra le coordinate pari a k 
+                                                    //(Cioe' indice di riga + k con wrap around alla matrice dara' l'indice di colonna)
             broadcastA = localA;
         }
         MPI_Bcast(broadcastA[0], localN*localN, MPI_INT, (coordinates[0] + k)%p, gridRow); 
@@ -241,7 +241,7 @@ void roll(int** localB, int localN, int myRank, int numProcesses, int p, int* co
     // Invio la matrice locale alla riga inferiore
     MPI_Isend(localB[0], localN * localN, MPI_INT, (colRank + p - 1) % p, 30 + colRank, gridCol, &sendRequest);
     
-    // Ricevo la matrice locale dalla riga inferiore
+    // Ricevo la matrice locale dalla riga superiore
     MPI_Recv(recvB[0], localN * localN, MPI_INT, (colRank + 1) % p, 30 + ((colRank + 1) % p), gridCol, MPI_STATUS_IGNORE);
     
     // Attendo la fine dell'invio
