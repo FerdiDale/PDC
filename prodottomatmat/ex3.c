@@ -58,14 +58,15 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
             if (row < remainingRows) {
                 sendcounts[row]++;
             }
-            sendcounts[row] *= globalsizes[1];
+            // sendcounts[row] *= globalsizes[1];
             if (row > 0)
                 senddispls[row] = senddispls[row - 1] + sendcounts[row - 1];
         }
 
         /* allocare i dati della mia riga */
-        rowdata = allocint2darray(sendcounts[myrow]/globalsizes[1], globalsizes[1]);
+        rowdata = allocint2darray(sendcounts[myrow], globalsizes[1]);
         if (rowdata == NULL) {
+            fprintf(stderr, "Errore: Allocazione di memoria di una matrice ausiliaria non riuscita.\n");
             fprintf(stderr, "Errore processore=%dx%d: Allocazione di memoria per la matrice rowdata %dx%d non riuscita.\n", myrow, mycol, sendcounts[myrow], globalsizes[1]);
             MPI_Abort(MPI_COMM_WORLD, 1); // Abort all MPI processes
             exit(1);
@@ -134,7 +135,6 @@ void distributeMatrix(int *globalptr, const int myrow, const int mycol, const in
 void printLocalMatrix(int **localMatrix, int localRows, int localCols, int myRank) {
     int i, j;
 
-    printf("Sono il processo numero %d e stampo:\n", myRank);
     for (i = 0; i < localRows; i++) {
         for (j = 0; j < localCols; j++) {
             printf("%d ", localMatrix[i][j]);
@@ -146,10 +146,10 @@ void printLocalMatrix(int **localMatrix, int localRows, int localCols, int myRan
 
 int **allocint2darray(int n, int m) {
     int i;
-    int **ptrs = malloc(n*sizeof(int *));
+    int **ptrs = calloc(n,sizeof(int *));
     if (ptrs == NULL)
         return NULL;
-    ptrs[0] = malloc(n*m*sizeof(int));
+    ptrs[0] = calloc(n*m,sizeof(int));
     if (ptrs[0] == NULL)
         return NULL;
     for (i=1; i<n; i++) 

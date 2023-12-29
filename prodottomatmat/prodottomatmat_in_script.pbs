@@ -1,23 +1,37 @@
 #!/bin/bash
 
-# PBS directives
+# Direttive per PBS
+# Definizione della coda
+# -q: coda utilizzata (studenti)
+# -l: specifica del numero di nodi e processori per nodo
+# -N: nome del job
+# -o: file di output
+# -e: file di errore
+# Nota: sostituire DIM, NCPU e CICLO con i valori appropriati
+# in fase di esecuzione del job.
+# Esempio: qsub -v DIM=10,NCPU=8,CICLO=1 prodottomatmat_in_script.sh
+# per eseguire lo script con DIM=10, NCPU=8 e CICLO=1.
+# -----------------------------------------
 #PBS -q studenti
 #PBS -l nodes=8:ppn=8
 #PBS -N prodottomatmat
 #PBS -o prodottomatmat_${DIM}_${NCPU}_${CICLO}.out
 #PBS -e prodottomatmat_${DIM}_${NCPU}_${CICLO}.err
 
+# Creazione di un file hostlist contenente la lista dei nodi
 sort -u $PBS_NODEFILE > hostlist
 cat $PBS_NODEFILE
 
+# Impostazione della directory di lavoro
 PBS_O_WORKDIR=$PBS_O_HOME/prodottomatmat
 
-# Calculate the number of CPUs
+# Calcolo del numero di CPU
 echo "---------------------------"
 echo "This job is allocated on $NCPU CPU(s)."
 echo "Job is running on node(s):"
 cat hostlist
 
+# Informazioni PBS
 echo "----------------------"
 echo "PBS: qsub is running on $PBS_O_HOST"
 echo "PBS: originating queue is $PBS_O_QUEUE"

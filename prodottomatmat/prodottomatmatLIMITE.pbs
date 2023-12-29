@@ -12,7 +12,7 @@ cat $PBS_NODEFILE
 
 PBS_O_WORKDIR=$PBS_O_HOME/prodottomatmat
 
-# Calculate the number of CPUs
+# Calcola il numero di CPU
 echo "---------------------------"
 echo "This job is allocated on $NCPU CPU(s)."
 echo "Job is running on node(s):"
